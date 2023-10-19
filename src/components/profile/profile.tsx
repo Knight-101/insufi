@@ -110,7 +110,7 @@ export default function Profile() {
       <div className="grow pt-6 pb-9 md:-mt-2.5 md:pt-1.5 md:pb-0 md:ltr:pl-7 md:rtl:pr-7 lg:ltr:pl-10 lg:rtl:pr-10 3xl:ltr:pl-14 3xl:rtl:pr-14">
         <Portfolio />
       </div>
-      <AuthorInformation data={authorData} />
+      {/* <AuthorInformation data={authorData} /> */}
     </div>
   );
 }

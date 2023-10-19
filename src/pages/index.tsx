@@ -19,20 +19,20 @@ const HomePage: NextPageWithLayout<
 > = () => {
   const { layout } = useLayout();
 
-  // render minimal screen/page
-  if (layout === LAYOUT_OPTIONS.MINIMAL) {
-    return <MinimalScreen />;
-  }
+  // // render minimal screen/page
+  // if (layout === LAYOUT_OPTIONS.MINIMAL) {
+  //   return <MinimalScreen />;
+  // }
 
-  // render classic screen/page
-  if (layout === LAYOUT_OPTIONS.CLASSIC) {
-    return <ClassicScreen />;
-  }
+  // // render classic screen/page
+  // if (layout === LAYOUT_OPTIONS.CLASSIC) {
+  //   return <ClassicScreen />;
+  // }
 
-  // render retro screen/page
-  if (layout === LAYOUT_OPTIONS.RETRO) {
-    return <RetroScreen />;
-  }
+  // // render retro screen/page
+  // if (layout === LAYOUT_OPTIONS.RETRO) {
+  //   return <RetroScreen />;
+  // }
 
   // render default screen/page which is modern
   return <ModernScreen />;

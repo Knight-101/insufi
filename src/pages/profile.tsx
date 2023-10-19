@@ -59,14 +59,14 @@ const AuthorProfilePage: NextPageWithLayout<
     <>
       <div className="mx-auto flex w-full shrink-0 flex-col md:px-4 xl:px-6 3xl:max-w-[1700px] 3xl:px-12">
         <Portfolio />
-        {/* <SidebarTwo /> */}
+        <SidebarTwo className="ltr:right-0 ltr:left-auto rtl:left-0 rtl:right-auto  xl:block" />
       </div>
     </>
   );
 };
 
 AuthorProfilePage.getLayout = function getLayout(page) {
-  return <RootLayout>{page}</RootLayout>;
+  return <RootLayout contentClassName='ltr:lg:pr-80 rtl:xl:pr-72 rtl:2xl:pr-80 3xl:pt-0.5 ltr:3xl:pr-[350px]'>{page}</RootLayout>;
 };
 
 export default AuthorProfilePage;

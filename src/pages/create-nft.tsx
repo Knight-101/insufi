@@ -9,17 +9,17 @@ import CreateNFT from '@/components/create-nft/create-nft';
 const CreateNFTPage: NextPageWithLayout = () => {
   const { layout } = useLayout();
   // render retro layout
-  if (layout === LAYOUT_OPTIONS.RETRO) {
-    return (
-      <>
-        <NextSeo
-          title="Create NFT"
-          description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
-        />
-        <CreateNFTRetro />
-      </>
-    );
-  }
+  // if (layout === LAYOUT_OPTIONS.RETRO) {
+  //   return (
+  //     <>
+  //       <NextSeo
+  //         title="Create NFT"
+  //         description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
+  //       />
+  //       <CreateNFTRetro />
+  //     </>
+  //   );
+  // }
   // render default create NFT component
   return (
     <>

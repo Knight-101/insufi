@@ -1,8 +1,0 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/farms": "pages/farms.js",
-  "/profile": "pages/profile.js",
-  "/create-nft": "pages/create-nft.js"
-}
