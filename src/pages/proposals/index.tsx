@@ -31,7 +31,7 @@ const ProposalsPage: NextPageWithLayout = () => {
     {
       title: (
         <>
-          Active{' '}
+          Risk Mitigation Strategies
           {totalActiveVote > 0 && (
             <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
               {totalActiveVote}
@@ -44,7 +44,7 @@ const ProposalsPage: NextPageWithLayout = () => {
     {
       title: (
         <>
-          Off-Chain{' '}
+          Claim Processor
           {totalOffChainVote > 0 && (
             <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
               {totalOffChainVote}
@@ -57,7 +57,7 @@ const ProposalsPage: NextPageWithLayout = () => {
     {
       title: (
         <>
-          Executable{' '}
+          Risk Oracles{' '}
           {totalExecutableVote > 0 && (
             <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
               {totalExecutableVote}
@@ -70,7 +70,7 @@ const ProposalsPage: NextPageWithLayout = () => {
     {
       title: (
         <>
-          Past{' '}
+          Solvency{' '}
           {totalPastVote > 0 && (
             <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
               {totalPastVote}

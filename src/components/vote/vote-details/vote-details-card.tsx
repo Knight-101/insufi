@@ -29,7 +29,7 @@ function VoteActionButton() {
 
 // FIXME: need to add vote type
 export default function VoteDetailsCard({ vote }: any) {
-  const [isExpand, setIsExpand] = useState(false);
+  const [isExpand, setIsExpand] = useState(true);
   const { layout } = useLayout();
 
   return (
@@ -62,7 +62,7 @@ export default function VoteDetailsCard({ vote }: any) {
           {/* show only when vote is active */}
           {vote.status === 'active' && (
             <>
-              {!isExpand ? (
+              {(
                 <Button
                   onClick={() => setIsExpand(!isExpand)}
                   className="mt-4 w-full xs:mt-6 xs:w-auto md:mt-10"
@@ -70,8 +70,6 @@ export default function VoteDetailsCard({ vote }: any) {
                 >
                   Vote Now
                 </Button>
-              ) : (
-                <VoteActionButton />
               )}
             </>
           )}
@@ -158,26 +156,26 @@ export default function VoteDetailsCard({ vote }: any) {
                 {vote.proposed_by.id} <ExportIcon className="h-auto w-3" />
               </a>
             </div>
-            <VotePoll
+            {/* <VotePoll
               title={'Votes'}
               accepted={vote?.accepted}
               rejected={vote?.rejected}
             />
-            <VoterTable votes={vote?.votes} />
-            <RevealContent defaultHeight={250}>
-              <h4 className="mb-6 uppercase dark:text-gray-100">Description</h4>
-              <div
-                className="dynamic-html grid gap-2 leading-relaxed text-gray-600 dark:text-gray-400"
-                dangerouslySetInnerHTML={{ __html: vote.description }}
-              />
-            </RevealContent>
-            <RevealContent
+            <VoterTable votes={vote?.votes} /> */}
+            {/* <RevealContent defaultHeight={250}> */}
+            <h4 className="mb-6 uppercase dark:text-gray-100">Description</h4>
+            <div
+              className="dynamic-html grid gap-2 leading-relaxed text-gray-600 dark:text-gray-400"
+              dangerouslySetInnerHTML={{ __html: vote.description }}
+            />
+            {/* </RevealContent> */}
+            {/* <RevealContent
               defaultHeight={320}
               className="mt-6 border-t border-dashed border-gray-200 pt-6 dark:border-gray-700"
             >
               <VoteActions title={'Actions'} action={vote?.action} />
-            </RevealContent>
-            <div className="mt-6 flex items-center justify-center border-t border-dashed border-gray-200 pt-6 dark:border-gray-700">
+            </RevealContent> */}
+            {/* <div className="mt-6 flex items-center justify-center border-t border-dashed border-gray-200 pt-6 dark:border-gray-700">
               <Button
                 shape="rounded"
                 fullWidth={true}
@@ -189,7 +187,7 @@ export default function VoteDetailsCard({ vote }: any) {
               >
                 Add POOL token to MetaMask
               </Button>
-            </div>
+            </div> */}
           </motion.div>
         )}
       </AnimatePresence>

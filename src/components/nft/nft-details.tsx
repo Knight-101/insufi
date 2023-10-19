@@ -9,6 +9,7 @@ import { nftData } from '@/data/static/single-nft';
 import NftDropDown from '@/components/nft/nft-dropdown';
 import Avatar from '@/components/ui/avatar';
 import NftFooter from './nft-footer';
+import SwapCard from '../ui/swap-card';
 
 type Avatar = {
   id: string | number;
@@ -47,20 +48,10 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
 
   return (
     <div className="flex flex-grow">
-      <div className="mx-auto flex w-full flex-grow flex-col transition-all xl:max-w-[1360px] 4xl:max-w-[1760px]">
-        <div className="relative mb-5 flex flex-grow items-center justify-center md:pb-7 md:pt-4 ltr:md:left-0 ltr:md:pl-6 rtl:md:right-0 rtl:md:pr-6 lg:fixed lg:mb-0 lg:h-[calc(100%-96px)] lg:w-[calc(100%-492px)] ltr:lg:pl-8 rtl:lg:pr-8 xl:w-[calc(100%-550px)] ltr:xl:pr-12 ltr:xl:pl-[340px] rtl:xl:pl-12 rtl:xl:pr-[340px] ltr:2xl:pl-96 rtl:2xl:pr-96 3xl:w-[calc(100%-632px)] ltr:4xl:pl-0 rtl:4xl:pr-0">
-          <div className="flex h-full max-h-full w-full items-center justify-center lg:max-w-[768px]">
-            <div className="relative aspect-square max-h-full overflow-hidden rounded-lg">
-              <Image
-                src={image}
-                alt={name}
-                className="h-full bg-gray-200 dark:bg-light-dark"
-              />
-            </div>
-          </div>
-        </div>
+      <SwapCard />
+      <div className="mx-auto flex flex-col transition-all xl:max-w-[1360px] 4xl:max-w-[1760px]">
 
-        <div className="relative flex w-full flex-grow flex-col justify-between ltr:md:ml-auto ltr:md:pl-8 rtl:md:mr-auto rtl:md:pr-8 lg:min-h-[calc(100vh-96px)] lg:w-[460px] ltr:lg:pl-12 rtl:lg:pr-12 xl:w-[592px] ltr:xl:pl-20 rtl:xl:pr-20">
+        <div className="relative flex w-full self-end flex-col justify-between ltr:md:pl-8 rtl:md:mr-auto rtl:md:pr-8 lg:min-h-[calc(100vh-96px)] lg:w-[460px] ltr:lg:pl-12 rtl:lg:pr-12 xl:w-[592px] ltr:xl:pl-20 rtl:xl:pr-20">
           <div className="block">
             <div className="block">
               <div className="flex justify-between">

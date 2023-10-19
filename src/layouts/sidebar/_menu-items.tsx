@@ -50,6 +50,11 @@ export const menuItems = [
     icon: <ProfileIcon />,
     href: routes.profile,
   },
+  {
+    name: 'Risk Management',
+    icon: <VoteIcon />,
+    href: routes.proposals,
+  },
   // {
   //   name: 'Vote',
   //   icon: <VoteIcon />,

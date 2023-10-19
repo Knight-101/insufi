@@ -18,9 +18,15 @@ export default function WalletConnect({
 }) {
   const { openModal } = useModal();
   const { address, disconnectWallet, balance } = useContext(WalletContext);
+
   return (
     <>
-      {address && (
+      {address ? <Button
+        onClick={() => { }}
+        className={cn('shadow-main hover:shadow-large', btnClassName)}
+      >
+        {address.slice(0, 4) + "..." + (address.slice(-4, -1))}
+      </Button> : (
         <Button
           onClick={() => openModal('WALLET_CONNECT_VIEW')}
           className={cn('shadow-main hover:shadow-large', btnClassName)}
