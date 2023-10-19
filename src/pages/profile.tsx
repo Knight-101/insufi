@@ -7,6 +7,7 @@ import Image from '@/components/ui/image';
 import Avatar from '@/components/ui/avatar';
 import Profile from '@/components/profile/profile';
 import RetroProfile from '@/components/profile/retro-profile';
+import SidebarTwo from '@/layouts/sidebar/_portfolio';
 // static data
 import { authorData } from '@/data/static/author';
 import RootLayout from '@/layouts/_root-layout';
@@ -58,6 +59,7 @@ const AuthorProfilePage: NextPageWithLayout<
     <>
       <div className="mx-auto flex w-full shrink-0 flex-col md:px-4 xl:px-6 3xl:max-w-[1700px] 3xl:px-12">
         <Portfolio />
+        {/* <SidebarTwo /> */}
       </div>
     </>
   );

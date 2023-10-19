@@ -5,7 +5,7 @@ import { LAYOUT_OPTIONS } from '@/lib/constants';
 const cripticLayoutAtom = atom(
   typeof window !== 'undefined'
     ? localStorage.getItem('criptic-layout')
-    : LAYOUT_OPTIONS.MODERN
+    : LAYOUT_OPTIONS.RETRO
 );
 
 const cripticLayoutAtomWithPersistence = atom(

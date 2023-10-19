@@ -63,9 +63,9 @@ export default function CreateNFT() {
             <ClaimType value={claimType} onChange={setClaimType} />
           </div>
 
-          {/* <div className="hidden flex-col lg:flex">
+          <div className="hidden flex-col lg:flex">
             {/* NFT preview */}
-          {/* <InputLabel title="Preview" />
+            <InputLabel title="Preview" />
             <div className="relative flex flex-grow flex-col overflow-hidden rounded-lg bg-white shadow-card transition-all duration-200 hover:shadow-large dark:bg-light-dark">
               <div className="flex items-center p-4 text-sm font-medium text-gray-600 transition hover:text-gray-900 dark:text-gray-400">
                 <Avatar
@@ -94,7 +94,7 @@ export default function CreateNFT() {
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
 
         {/* Price */}
@@ -209,7 +209,7 @@ export default function CreateNFT() {
         </div>
 
         <Button shape="rounded">UNDERWRITE NOW</Button>
-      </div>
+      </div >
     </>
   );
 }

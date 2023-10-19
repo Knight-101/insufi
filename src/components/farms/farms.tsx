@@ -172,22 +172,18 @@ function Status() {
 }
 
 export default function Farms() {
-  const { layout } = useLayout();
   return (
     <div className="mx-auto w-full">
       <div
         className={cn(
-          'mb-6 flex flex-col justify-between gap-4',
-          layout === LAYOUT_OPTIONS.RETRO
-            ? 'lg:flex-row lg:items-center lg:gap-6'
-            : 'md:flex-row md:items-center md:gap-6'
+          'mb-6 flex flex-col justify-between gap-4', 'md:flex-row md:items-center md:gap-6'
         )}
       >
         <div className="flex items-center justify-between gap-4">
           <Status />
           <div
             className={cn(
-              layout === LAYOUT_OPTIONS.RETRO ? 'lg:hidden' : 'md:hidden'
+              'md:hidden'
             )}
           >
             <StackedSwitch />
@@ -198,7 +194,7 @@ export default function Farms() {
           <div
             className={cn(
               'hidden shrink-0 ',
-              layout === LAYOUT_OPTIONS.RETRO ? 'lg:block' : 'md:block'
+              'md:block'
             )}
           >
             <StackedSwitch />

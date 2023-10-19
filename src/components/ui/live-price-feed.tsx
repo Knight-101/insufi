@@ -39,14 +39,14 @@ export function LivePriceFeed({
   return (
     <div
       className={cn(
-        'flex items-center gap-4 rounded-lg bg-white p-5 dark:bg-light-dark lg:flex-row',
+        'flex flex-col items-end gap-4 rounded-lg bg-white dark:bg-light-dark',
         {
           'light:border light:border-slate-200': !isBorder,
           'shadow-card': !isBorder,
         }
       )}
     >
-      <div className="w-full flex-col">
+      {/* <div className="w-full flex-col">
         <div className="mb-3 flex items-center">
           {icon}
           <h4 className="text-sm font-medium text-gray-900 ltr:ml-3 rtl:mr-3 dark:text-white">
@@ -82,12 +82,33 @@ export function LivePriceFeed({
             {change}
           </span>
         </div>
-      </div>
+      </div> */}
+      <div className="flex items-center mt-4 mr-2 text-xs font-medium 2xl:text-sm">
+        <span
+          className="truncate tracking-tighter text-gray-600 ltr:mr-5 rtl:ml-5 dark:text-gray-400 2xl:w-24 3xl:w-auto"
+          title={`${usdBalance} USD`}
+        >
+          {usdBalance} USD
+        </span>
 
+        <span
+          className={`flex items-center  ${isChangePositive ? 'text-green-500' : 'text-red-500'
+            }`}
+        >
+          <span
+            className={`ltr:mr-2 rtl:ml-2 ${!isChangePositive ? 'rotate-180' : ''
+              }`}
+          >
+            <ArrowUp />
+          </span>
+          {change}
+        </span>
+      </div>
       <div
-        className="h-20 w-full"
+        className="h-48 w-full pt-4"
         data-hello={isChangePositive ? '#22c55e' : '#D6455D'}
       >
+
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={prices}>
             <defs>

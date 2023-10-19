@@ -184,11 +184,11 @@ function LayoutSwitcher() {
         }),
         ...(value !== LAYOUT_OPTIONS.MODERN &&
           view !== undefined && {
-            query: {
-              layout: value,
-              view,
-            },
-          }),
+          query: {
+            layout: value,
+            view,
+          },
+        }),
       },
       undefined,
       { scroll: false }
@@ -221,8 +221,8 @@ function LayoutSwitcher() {
 // Component: ColorSwitcher
 function ColorSwitcher() {
   const [themeColor, setThemeColor] = useLocalStorage(
-    'criptic-color',
-    '#323743'
+    'Blue',
+    '#2a52be',
   );
   useThemeColor(themeColor ? themeColor : '#323743');
   return (

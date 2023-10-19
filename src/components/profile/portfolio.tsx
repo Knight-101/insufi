@@ -5,6 +5,7 @@ import TransactionSearchForm from '@/components/author/transaction-search-form';
 import TransactionHistory from '@/components/author/transaction-history';
 import CollectionCard from '@/components/ui/collection-card';
 import { useLayout } from '@/lib/hooks/use-layout';
+import SidebarTwo from '@/layouts/sidebar/_portfolio';
 import { LAYOUT_OPTIONS } from '@/lib/constants';
 // static data
 import { collections } from '@/data/static/collections';
