@@ -74,7 +74,7 @@ export default function CreateNFT() {
                   alt="Cameronwilliamson"
                   className="border-white bg-gray-300 ltr:mr-3 rtl:ml-3 dark:bg-gray-400"
                 />
-                @Cameronwilliamson
+                Insurer
               </div>
               <div className="relative block w-full pb-full">
                 <Image
@@ -87,10 +87,10 @@ export default function CreateNFT() {
               </div>
               <div className="p-5">
                 <div className="text-sm font-medium text-black dark:text-white">
-                  Pulses Of Imagination #214
+                  Insuree
                 </div>
                 <div className="mt-4 text-lg font-medium text-gray-900 dark:text-white">
-                  0.40 ETH
+                  1 $
                 </div>
               </div>
             </div>
@@ -150,8 +150,8 @@ export default function CreateNFT() {
         {/* Explicit content */}
         <div className="mb-8">
           <ToggleBar
-            title="DYNAMIC PAYOUTS ON EXPIRY"
-            subTitle="Set the payout method of non-disbursed premiums for expired policies"
+            title="INTEGRATE DEEPBBOOK LIQUIDITY POOLS"
+            subTitle="Allow price discovery using SUI's native orderbook"
             icon={<Warning />}
             checked={explicit}
             onChange={() => setExplicit(!explicit)}
@@ -163,6 +163,13 @@ export default function CreateNFT() {
           <InputLabel
             title="Supply"
             subTitle="The total number of tokens to be minted. Recommended: Keep number of tokens same as coverage amount in US$"
+          />
+          <Input type="number" placeholder="1" disabled />
+        </div>
+        <div className="mb-8">
+          <InputLabel
+            title="UNDERWRITER COMMISSION"
+            subTitle="The total commision in % on the policy premium amount."
           />
           <Input type="number" placeholder="1" disabled />
         </div>

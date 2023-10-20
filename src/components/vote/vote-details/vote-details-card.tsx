@@ -29,7 +29,7 @@ function VoteActionButton() {
 
 // FIXME: need to add vote type
 export default function VoteDetailsCard({ vote }: any) {
-  const [isExpand, setIsExpand] = useState(true);
+  const [isExpand, setIsExpand] = useState(false);
   const { layout } = useLayout();
 
   return (
@@ -43,10 +43,8 @@ export default function VoteDetailsCard({ vote }: any) {
     >
       <motion.div
         layout
-        className={cn('flex w-full flex-col-reverse justify-between ', {
-          'md:grid md:grid-cols-3': layout !== LAYOUT_OPTIONS.RETRO,
-          'lg:grid lg:grid-cols-3': layout === LAYOUT_OPTIONS.RETRO,
-        })}
+        className={cn('flex w-full flex-col-reverse justify-between ', 'md:grid md:grid-cols-3'
+        )}
       >
         <div className="self-start md:col-span-2">
           <h3
@@ -62,7 +60,7 @@ export default function VoteDetailsCard({ vote }: any) {
           {/* show only when vote is active */}
           {vote.status === 'active' && (
             <>
-              {(
+              {!isExpand ? (
                 <Button
                   onClick={() => setIsExpand(!isExpand)}
                   className="mt-4 w-full xs:mt-6 xs:w-auto md:mt-10"
@@ -70,6 +68,8 @@ export default function VoteDetailsCard({ vote }: any) {
                 >
                   Vote Now
                 </Button>
+              ) : (
+                <VoteActionButton />
               )}
             </>
           )}
@@ -138,59 +138,52 @@ export default function VoteDetailsCard({ vote }: any) {
           </div>
         )}
       </motion.div>
-      <AnimatePresence>
-        {isExpand && (
-          <motion.div
-            layout
-            initial="exit"
-            animate="enter"
-            exit="exit"
-            variants={fadeInBottom('easeIn', 0.25, 16)}
-          >
-            <div className="my-6 border-y border-dashed border-gray-200 py-6 text-gray-500 dark:border-gray-700 dark:text-gray-400">
-              Proposed by:{' '}
-              <a
-                href={vote.proposed_by.link}
-                className="ml-1 inline-flex items-center gap-3 font-medium text-gray-900 hover:underline hover:opacity-90 focus:underline focus:opacity-90 dark:text-gray-100"
-              >
-                {vote.proposed_by.id} <ExportIcon className="h-auto w-3" />
-              </a>
-            </div>
-            {/* <VotePoll
-              title={'Votes'}
-              accepted={vote?.accepted}
-              rejected={vote?.rejected}
-            />
-            <VoterTable votes={vote?.votes} /> */}
-            {/* <RevealContent defaultHeight={250}> */}
-            <h4 className="mb-6 uppercase dark:text-gray-100">Description</h4>
-            <div
-              className="dynamic-html grid gap-2 leading-relaxed text-gray-600 dark:text-gray-400"
-              dangerouslySetInnerHTML={{ __html: vote.description }}
-            />
-            {/* </RevealContent> */}
-            {/* <RevealContent
+      {isExpand && (
+        <>
+          <div className="my-6 border-y border-dashed border-gray-200 py-6 text-gray-500 dark:border-gray-700 dark:text-gray-400">
+            Proposed by:{' '}
+            <a
+              href={vote.proposed_by.link}
+              className="ml-1 inline-flex items-center gap-3 font-medium text-gray-900 hover:underline hover:opacity-90 focus:underline focus:opacity-90 dark:text-gray-100"
+            >
+              {vote.proposed_by.id} <ExportIcon className="h-auto w-3" />
+            </a>
+          </div>
+          <VotePoll
+            title={'Votes'}
+            accepted={vote?.accepted}
+            rejected={vote?.rejected}
+          />
+          <VoterTable votes={vote?.votes} />
+          {/* <RevealContent defaultHeight={250}> */}
+          <h4 className="mb-6 uppercase dark:text-gray-100">Description</h4>
+          <div
+            className="dynamic-html grid gap-2 leading-relaxed text-gray-600 dark:text-gray-400"
+            dangerouslySetInnerHTML={{ __html: vote.description }}
+          />
+          {/* </RevealContent> */}
+          {/* <RevealContent
               defaultHeight={320}
               className="mt-6 border-t border-dashed border-gray-200 pt-6 dark:border-gray-700"
             >
               <VoteActions title={'Actions'} action={vote?.action} />
             </RevealContent> */}
-            {/* <div className="mt-6 flex items-center justify-center border-t border-dashed border-gray-200 pt-6 dark:border-gray-700">
-              <Button
-                shape="rounded"
-                fullWidth={true}
-                className={cn({
-                  'sm:w-4/6 md:w-3/6 xl:w-2/6': layout !== LAYOUT_OPTIONS.RETRO,
-                  'w-full lg:w-3/6 2xl:w-[48%] 3xl:w-1/3':
-                    layout === LAYOUT_OPTIONS.RETRO,
-                })}
-              >
-                Add POOL token to MetaMask
-              </Button>
-            </div> */}
-          </motion.div>
-        )}
-      </AnimatePresence>
+          <div className="mt-6 flex items-center justify-center border-t border-dashed border-gray-200 pt-6 dark:border-gray-700">
+            <Button
+              shape="rounded"
+              fullWidth={true}
+              onClick={() => setIsExpand(!isExpand)}
+              className={cn({
+                'sm:w-4/6 md:w-3/6 xl:w-2/6': layout !== LAYOUT_OPTIONS.RETRO,
+                'w-full lg:w-3/6 2xl:w-[48%] 3xl:w-1/3':
+                  layout === LAYOUT_OPTIONS.RETRO,
+              })}
+            >
+              Collapse
+            </Button>
+          </div>
+        </>
+      )}
     </motion.div>
   );
 }

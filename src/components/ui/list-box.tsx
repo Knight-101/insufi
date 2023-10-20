@@ -31,6 +31,7 @@ export default function Listbox({
   options,
   onChange,
   onSelect,
+  inputH,
   variant = 'ghost',
   selectedOption,
   className,
@@ -41,11 +42,11 @@ export default function Listbox({
       <HeadlessListbox value={selectedOption} onChange={onChange}>
         <HeadlessListbox.Button
           className={cn(
-            'text-case-inherit letter-space-inherit flex h-10 w-full items-center justify-between rounded-lg px-4 text-sm font-medium outline-none duration-200 sm:h-12 sm:px-5',
-            listboxVariantClasses[variant]
+            'text-case-inherit letter-space-inherit h-10 overflow-hidden flex w-full items-center justify-between rounded-lg px-4 text-sm font-medium outline-none duration-200 sm:h-12 sm:px-5',
+            listboxVariantClasses[variant], inputH
           )}
         >
-          <div className="flex items-center">{selectedOption?.name}</div>
+          <div className="flex items-left text-left">{selectedOption?.name}</div>
           <ChevronDown />
         </HeadlessListbox.Button>
         <Transition
@@ -60,11 +61,10 @@ export default function Listbox({
                 {({ selected }) => (
                   <div
                     onClick={() => onSelect && onSelect(option.value)}
-                    className={`flex cursor-pointer items-center rounded-md px-3 py-2 text-sm text-gray-900 transition dark:text-gray-100  ${
-                      selected
-                        ? 'bg-gray-200/70 font-medium dark:bg-gray-600/60'
-                        : 'hover:bg-gray-100 dark:hover:bg-gray-700/70'
-                    }`}
+                    className={`flex cursor-pointer items-center rounded-md px-3 py-2 text-sm text-gray-900 transition dark:text-gray-100  ${selected
+                      ? 'bg-gray-200/70 font-medium dark:bg-gray-600/60'
+                      : 'hover:bg-gray-100 dark:hover:bg-gray-700/70'
+                      }`}
                   >
                     {option.name}
                   </div>

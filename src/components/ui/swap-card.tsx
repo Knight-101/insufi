@@ -9,7 +9,7 @@ import { useState } from 'react';
 export default function SwapCard() {
     let [toggleCoin, setToggleCoin] = useState(false);
     return (
-        <div className="h-fit justify-center rounded-lg bg-white p-5 pt-4 shadow-card dark:bg-light-dark xs:p-6 xs:pt-5">
+        <div className="h-fit items-center rounded-lg bg-white p-5 pt-4 shadow-card dark:bg-light-dark xs:p-6 xs:pt-5">
 
             <div className="mb-5 border-b border-dashed border-gray-200 pb-5 dark:border-gray-800 xs:mb-7 xs:pb-6">
                 <div

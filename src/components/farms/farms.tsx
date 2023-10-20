@@ -211,14 +211,14 @@ export default function Farms() {
         <span className="px-6 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300">
           Underwriter
         </span>
-        <span className="px-6 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300">
-          Validity
-        </span>
         <span className="hidden px-6 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300 lg:block">
           APY
         </span>
         <span className="hidden px-4 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300 lg:block">
           Liquidity
+        </span>
+        <span className="px-6 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300">
+          Validity
         </span>
       </div>
 

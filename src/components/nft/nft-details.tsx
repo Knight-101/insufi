@@ -10,6 +10,9 @@ import NftDropDown from '@/components/nft/nft-dropdown';
 import Avatar from '@/components/ui/avatar';
 import NftFooter from './nft-footer';
 import SwapCard from '../ui/swap-card';
+import LiquidityChart from '../ui/chats/liquidity-chart';
+import VolumeChart from '../ui/chats/volume-chart';
+import ComparisonChart from '../ui/chats/comparison-chart';
 
 type Avatar = {
   id: string | number;
@@ -47,8 +50,11 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
   } = product;
 
   return (
-    <div className="flex flex-grow">
+    <div className="flex self-center flex-grow">
+
       <SwapCard />
+
+
       <div className="mx-auto flex flex-col transition-all xl:max-w-[1360px] 4xl:max-w-[1760px]">
 
         <div className="relative flex w-full self-end flex-col justify-between ltr:md:pl-8 rtl:md:mr-auto rtl:md:pr-8 lg:min-h-[calc(100vh-96px)] lg:w-[460px] ltr:lg:pl-12 rtl:lg:pr-12 xl:w-[592px] ltr:xl:pl-20 rtl:xl:pr-20">
@@ -66,13 +72,13 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                 href={minted_slug}
                 className="mt-1.5 inline-flex items-center text-sm -tracking-wider text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white xl:mt-2.5"
               >
-                Minted on {minted_date}
+                Created on {minted_date}
                 <ArrowLinkIcon className="h-3 w-3 ltr:ml-2 rtl:mr-2" />
               </AnchorLink>
               <div className="mt-4 flex flex-wrap gap-6 pt-0.5 lg:-mx-6 lg:mt-6 lg:gap-0">
                 <div className="shrink-0 border-dashed border-gray-200 dark:border-gray-700 lg:px-6 lg:ltr:border-r lg:rtl:border-l">
                   <h3 className="text-heading-style mb-2 uppercase text-gray-900 dark:text-white">
-                    Created By
+                    Insuree
                   </h3>
                   <AnchorLink href={creator?.slug} className="inline-flex">
                     <ListCard
@@ -83,7 +89,7 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                 </div>
                 <div className="shrink-0 lg:px-6">
                   <h3 className="text-heading-style mb-2.5 uppercase text-gray-900 dark:text-white">
-                    Collection
+                    Insurer
                   </h3>
                   <AnchorLink href="#" className="inline-flex">
                     <ListCard
@@ -102,11 +108,11 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                     path: 'details',
                   },
                   {
-                    title: 'Bids',
+                    title: 'ROI',
                     path: 'bids',
                   },
                   {
-                    title: 'History',
+                    title: 'Liquidity',
                     path: 'history',
                   },
                 ]}
@@ -123,34 +129,18 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                     </div>
                     <div className="block">
                       <h3 className="text-heading-style mb-2 uppercase text-gray-900 dark:text-white">
-                        Owner
+                        Expires On
                       </h3>
-                      <AnchorLink href={owner?.slug} className="inline-block">
-                        <ListCard
+                      <AnchorLink href={owner?.slug} className="inline-block text-gray-600 hover:text-gray-900 dark:text-gray-400">
+
+                        {minted_date}
+                        {/* <ListCard
                           item={owner}
                           className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                        />
+                        /> */}
                       </AnchorLink>
                     </div>
-                    <div className="block">
-                      <h3 className="text-heading-style mb-2 uppercase text-gray-900 dark:text-white">
-                        Block Chain
-                      </h3>
-                      <div className="flex flex-col gap-2">
-                        {block_chains?.map((item: any) => (
-                          <AnchorLink
-                            href="#"
-                            className="inline-flex"
-                            key={item?.id}
-                          >
-                            <ListCard
-                              item={item}
-                              className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
-                            />
-                          </AnchorLink>
-                        ))}
-                      </div>
-                    </div>
+
                   </div>
                 </TabPanel>
                 <TabPanel className="focus:outline-none">
@@ -166,25 +156,26 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                 </TabPanel>
                 <TabPanel className="focus:outline-none">
                   <div className="flex flex-col-reverse">
-                    {nftData?.history?.map((item) => (
+                    {/* {nftData?.history?.map((item) => (
                       <FeaturedCard
                         item={item}
                         key={item?.id}
                         className="mb-3 first:mb-0"
                       />
-                    ))}
+                    ))} */}
+                    <ComparisonChart />
                   </div>
                 </TabPanel>
               </ParamTab>
             </div>
           </div>
-          <NftFooter
+          {/* <NftFooter
             className="hidden md:block"
             currentBid={nftData?.bids[nftData?.bids?.length - 1]}
             auctionTime={Date.now() + 4000000 * 10}
             isAuction={isAuction}
             price={price}
-          />
+          /> */}
         </div>
         <NftFooter
           currentBid={nftData?.bids[nftData?.bids?.length - 1]}

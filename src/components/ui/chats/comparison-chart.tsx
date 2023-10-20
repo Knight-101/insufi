@@ -24,7 +24,9 @@ import {
   weeklyComparison,
   monthlyComparison,
   yearlyComparison,
+  orderbookData,
 } from '@/data/static/price-history';
+import { Usdc } from '@/components/icons/usdc';
 
 function CustomAxis({ x, y, payload }: any) {
   return (
@@ -48,9 +50,8 @@ function RadioGroupOption({ value }: RadioOptionProps) {
     <RadioGroup.Option value={value}>
       {({ checked }) => (
         <span
-          className={`relative flex h-8 cursor-pointer items-center justify-center rounded-lg px-3 text-sm uppercase tracking-wider ${
-            checked ? 'text-white' : 'text-brand dark:text-gray-400'
-          }`}
+          className={`relative flex h-8 cursor-pointer items-center justify-center rounded-lg px-3 text-sm uppercase tracking-wider ${checked ? 'text-white' : 'text-brand dark:text-gray-400'
+            }`}
         >
           {checked && (
             <motion.span
@@ -71,7 +72,7 @@ export default function ComparisonChart() {
   const [price, setPrice] = useState(6.2);
   const [date, setDate] = useState(1624147200);
   const [status, setStatus] = useState('Month');
-  const [chartData, setChartData] = useState(monthlyComparison);
+  const [chartData, setChartData] = useState(orderbookData);
   const [priceDiff, setPriceDiff] = useState(-1.107);
   const [percentage, setPercentage] = useState('2.22%');
   const [toggleCoin, setToggleCoin] = useState(false);
@@ -108,7 +109,8 @@ export default function ComparisonChart() {
                 )}
               >
                 <Bitcoin className="h-auto w-7 lg:w-9" />
-                <EthereumDark className="h-auto w-7 lg:w-9" />
+                {/* <EthereumDark className="h-auto w-7 lg:w-9" /> */}
+                <Usdc className="h-auto w-7 lg:w-9" />
               </span>
               <span
                 className={cn(
@@ -116,9 +118,9 @@ export default function ComparisonChart() {
                   toggleCoin ? 'flex-row-reverse' : 'flex-row'
                 )}
               >
-                <span>BTCB</span>/<span>ETH</span>
+                <span>BTCB</span>/<span>USDC</span>
               </span>
-              <Button
+              {/* <Button
                 size="mini"
                 color="gray"
                 shape="circle"
@@ -127,41 +129,40 @@ export default function ComparisonChart() {
                 className="rotate-90 border border-gray-100 shadow-[0px_6px_14px_rgba(0,0,0,0.08)]"
               >
                 <SwapIcon className="h-auto w-3" />
-              </Button>
+              </Button> */}
             </span>
           </div>
           <div className="mt-5 flex items-end gap-3 text-base font-medium text-gray-900 dark:text-white sm:text-xl lg:flex-wrap 2xl:flex-nowrap">
-            <span className="text-2xl font-semibold xl:text-4xl">{price}</span>
+            {/* <span className="text-2xl font-semibold xl:text-4xl">{price}</span> */}
             <span
               className={cn(
-                'flex items-end',
-                toggleCoin ? 'flex-row-reverse' : 'flex-row'
+                'flex items-center gap-4'
               )}
             >
-              <span>BTCB</span>/<span>ETH</span>
+              <span className='text-sm text-gray-600 dark:text-gray-400'>Last traded price: </span>
+              <span>62.3$</span>
             </span>
 
-            <span
+            {/* <span
               className={cn(
                 'mb-1 flex items-center text-xs sm:mb-0 sm:text-base',
                 priceDiff > 0 ? 'text-green-500' : 'text-red-500'
               )}
             >
               <span
-                className={`inline-flex ltr:mr-2 rtl:ml-2 ${
-                  priceDiff > 0 ? '' : 'rotate-180'
-                }`}
+                className={`inline-flex ltr:mr-2 rtl:ml-2 ${priceDiff > 0 ? '' : 'rotate-180'
+                  }`}
               >
                 <ArrowUp />
               </span>
               {priceDiff} ({percentage})
-            </span>
+            </span> */}
           </div>
-          <div className="mt-6 flex items-center gap-1.5 text-xs font-medium text-gray-600 dark:text-gray-400 sm:text-sm">
+          {/* <div className="mt-6 flex items-center gap-1.5 text-xs font-medium text-gray-600 dark:text-gray-400 sm:text-sm">
             <Refresh /> {formattedDate}
-          </div>
+          </div> */}
         </div>
-        <RadioGroup
+        {/* <RadioGroup
           value={status}
           onChange={handleOnChange}
           className="flex items-center gap-5"
@@ -169,16 +170,16 @@ export default function ComparisonChart() {
           <RadioGroupOption value="Week" />
           <RadioGroupOption value="Month" />
           <RadioGroupOption value="Year" />
-        </RadioGroup>
+        </RadioGroup> */}
       </div>
 
-      <div className="mt-5 h-56 sm:mt-8 md:h-96 lg:h-[380px] xl:h-[402px] 2xl:h-[30rem] 3xl:h-[496px] 4xl:h-[580px]">
+      <div className="mt-5 h-56 sm:mt-8">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
-            width={500}
-            height={400}
+            width={200}
+            height={200}
             data={chartData}
-            barSize={breakpoint === 'xs' ? 15 : 30}
+            barSize={25}
             margin={{
               top: 20,
               right: 0,
@@ -202,7 +203,7 @@ export default function ComparisonChart() {
               }
             }}
           >
-            <XAxis dataKey="name" tick={<CustomAxis />} />
+            {/* <XAxis dataKey="name" tick={<CustomAxis />} /> */}
             <Tooltip
               content={<></>}
               cursor={{
@@ -215,8 +216,8 @@ export default function ComparisonChart() {
               strokeDasharray="10 5"
               stroke={theme === 'dark' ? '#374151' : '#E5E7EB'}
             />
-            <Bar dataKey="btc" stackId="a" fill="#3A63E0" />
-            <Bar dataKey="eth" stackId="a" fill="#98AFF5" />
+            <Bar dataKey="btc" stackId="a" fill="rgb(34 197 94)" />
+            <Bar dataKey="eth" stackId="a" fill="rgb(239 68 68)" />
           </BarChart>
         </ResponsiveContainer>
       </div>

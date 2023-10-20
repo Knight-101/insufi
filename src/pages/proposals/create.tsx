@@ -13,19 +13,33 @@ import Listbox, { ListboxOption } from '@/components/ui/list-box';
 // static data
 import votePool from '@/assets/images/vote-pool.svg';
 import RootLayout from '@/layouts/_root-layout';
+import { Switch } from '@headlessui/react';
+import ToggleBar from '@/components/ui/toggle-bar';
+import { Warning } from '@/components/icons/warning';
 
 const actionOptions = [
   {
-    name: 'Custom Contact',
-    value: 'custom_contact',
+    name: 'Oracle',
+    value: 'oracle',
   },
   {
-    name: 'CRIPTIC Token',
-    value: 'criptic_token',
+    name: 'Bid for claim processing',
+    value: 'bid',
   },
   {
-    name: 'Reserve',
-    value: 'reserve',
+    name: 'Risk mitigation strategy',
+    value: 'risk',
+  },
+];
+
+const chartOptions = [
+  {
+    name: 'Line chart',
+    value: 'line',
+  },
+  {
+    name: 'Bar chart',
+    value: 'bar',
   },
 ];
 
@@ -48,31 +62,46 @@ const reserveOptions = [
   },
 ];
 
+const claims = [
+  {
+    name: 'Firebase RealtimeDB experienced an unexpected downtime lasting for six hours on May 12, 2023',
+    value: 'firebase',
+  },
+  {
+    name: 'BigQuery Service Level Agreement (SLA) for Bing API was violated on March 23, 2023',
+    value: 'bigquery',
+  },
+  {
+    name: 'Africa Availability Zone was down for 8 hours on September 21, 2023',
+    value: 'africa',
+  },
+];
+
 const cripticTokenOptions = [
   {
-    name: 'Approve',
-    value: 'approve',
+    name: 'Google FY24 FB BS',
+    value: 'google',
   },
-  {
-    name: 'Delegated',
-    value: 'delegated',
-  },
-  {
-    name: 'Mint',
-    value: 'mint',
-  },
-  {
-    name: 'Set Minter',
-    value: 'setMinter',
-  },
-  {
-    name: 'Transfer',
-    value: 'transfer',
-  },
-  {
-    name: 'Transfer From',
-    value: 'transferFrom',
-  },
+  // {
+  //   name: 'Delegated',
+  //   value: 'delegated',
+  // },
+  // {
+  //   name: 'Mint',
+  //   value: 'mint',
+  // },
+  // {
+  //   name: 'Set Minter',
+  //   value: 'setMinter',
+  // },
+  // {
+  //   name: 'Transfer',
+  //   value: 'transfer',
+  // },
+  // {
+  //   name: 'Transfer From',
+  //   value: 'transferFrom',
+  // },
 ];
 
 function CripticTokenAction({
@@ -183,17 +212,23 @@ function CripticTokenAction({
 function ActionFields() {
   let [actionType, setActionType] = useState(actionOptions[0]);
   let [reserveAction, setReserveAction] = useState(reserveOptions[0]);
+  let [chart, setChart] = useState(
+    chartOptions[0]
+  );
   let [cripticTokenAction, setCripticTokenAction] = useState(
     cripticTokenOptions[0]
+  );
+  let [claim, setClaim] = useState(
+    claims[0]
   );
   return (
     <div className="">
       <div className="group mb-4 rounded-md bg-gray-100/90 p-5 pt-3 dark:bg-dark/60 xs:p-6 xs:pb-8">
         <div className="-mr-2 mb-3 flex items-center justify-between">
           <h3 className="text-base font-medium dark:text-gray-100">
-            Action #1
+            Choose Proposal
           </h3>
-          <Button
+          {/* <Button
             type="button"
             size="mini"
             shape="circle"
@@ -201,51 +236,178 @@ function ActionFields() {
             className="opacity-0 group-hover:opacity-100 dark:text-gray-300"
           >
             <CloseIcon className="h-auto w-[11px] xs:w-3" />
-          </Button>
+          </Button> */}
         </div>
         <>
+
           <Listbox
             className="w-full sm:w-80"
             options={actionOptions}
             selectedOption={actionType}
             onChange={setActionType}
           />
-          {actionType.value === 'custom_contact' && (
+          {actionType.value === 'bid' && (
+            <div className="mt-4 ltr:xs:ml-6 rtl:xs:mr-6 ltr:sm:ml-12 rtl:sm:mr-12">
+              <Listbox
+                className="w-full sm:w-80"
+                options={claims}
+                inputH={"sm:h-20"}
+                selectedOption={claim}
+                onChange={setClaim}
+              />
+            </div>
+          )}
+          <Listbox
+            className="w-full sm:w-80 mt-4"
+            options={cripticTokenOptions}
+            selectedOption={cripticTokenAction}
+            onChange={setCripticTokenAction}
+          />
+          {/* oracle */}
+          {actionType.value === 'oracle' && (
+            <>
+              <div className="mb-6 mt-4 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
+                <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
+                  Enter contract address
+                </h3>
+                {/* <p className="mb-5 leading-[1.8] dark:text-gray-300">
+            Your title introduces your proposal to the voters. Make sure it is
+            clear and to the point.
+          </p> */}
+                <Input placeholder="" />
+              </div>
+              <div className="mb-6 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
+                <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
+                  Set refresh frequency
+                </h3>
+                {/* <p className="mb-5 leading-[1.8] dark:text-gray-300">
+            Your title introduces your proposal to the voters. Make sure it is
+            clear and to the point.
+          </p> */}
+                <Input placeholder="" />
+              </div>
+              <div className="mb-6 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
+                <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
+                  Select chart type
+                </h3>
+                <Listbox
+                  className="w-full sm:w-80 mt-4"
+                  options={chartOptions}
+                  selectedOption={chart}
+                  onChange={setChart}
+                />
+              </div>
+            </>
+          )}
+          {/* Risk */}
+          {actionType.value === 'risk' && (
+            <>
+              <div className="mb-6 mt-4 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
+                <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
+                  Risk Amount
+                </h3>
+                <p className="mb-5 leading-[1.8] dark:text-gray-300">
+                  Amount in $ terms what will be the amount risk managed
+                </p>
+                <Input placeholder="" />
+              </div>
+              <div className="mb-6 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
+                <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
+                  Lambda Function
+                </h3>
+                <p className="mb-5 leading-[1.8] dark:text-gray-300">
+                  The code for the risk modelling and post-mitigation risk calculation
+                </p>
+                <Input placeholder="" />
+              </div>
+              <div className="mb-6 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
+                <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
+                  Processing Fee
+                </h3>
+                <p className="mb-5 leading-[1.8] dark:text-gray-300">
+                  Fee in %age terms what will your charges be for managing this risk
+                </p>
+                <Input placeholder="" />
+              </div>
+              <div className="mb-6 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
+                <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
+                  Monitoring Oracle
+                </h3>
+                <p className="mb-5 leading-[1.8] dark:text-gray-300">
+                  Pub key of oracle of outstanding risk valu
+                </p>
+                <Input placeholder="" />
+              </div>
+              <div className="mb-6 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
+                <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
+                  Transparency
+                </h3>
+                <p className="mb-5 leading-[1.8] dark:text-gray-300">
+                  IPFS of snapshots of runtime of mitigation strategies
+                </p>
+                <Input placeholder="" />
+              </div>
+
+            </>
+          )}
+          {actionType.value === 'bid' && (
+            <>
+              <div className="mb-6 mt-4 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
+                <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
+                  Processing Fee
+                </h3>
+                <p className="mb-5 leading-[1.8] dark:text-gray-300">
+                  Fee in %age terms what will your charges be for processing this claim
+                </p>
+                <Input placeholder="" />
+              </div>
+              <div className="mb-6 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
+                <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
+                  Settlement Breakdown
+                </h3>
+                <p className="mb-5 leading-[1.8] dark:text-gray-300">
+                  attach a detailed breakdown of the total itemized amount of settlement you will be paying out for this claim
+                </p>
+                <Input placeholder="" />
+              </div>
+              <div className="mb-8">
+                <ToggleBar
+                  title="PROTOCOL LIABILITY"
+                  subTitle="Waiver of protocol liability in case incorrect settlement leads to a possible lawsuit."
+                  icon={<Warning />}
+                />
+              </div>
+            </>
+          )}
+          {/* {actionType.value === 'oracle' && (
             <Input
               className="mt-4 ltr:xs:ml-6 rtl:xs:mr-6 ltr:sm:ml-12 rtl:sm:mr-12"
               useUppercaseLabel={false}
               placeholder="Enter contact address 0x1f9840a85..."
             />
-          )}
-          {actionType.value === 'criptic_token' && (
+          )} */}
+          {/* {actionType.value === 'bid' && (
             <div className="rtl:xs:mlr6 rtl:sm:mlr12 mt-4 ltr:xs:ml-6 ltr:sm:ml-12">
               <CripticTokenAction
                 selectedOption={cripticTokenAction}
                 onChange={setCripticTokenAction}
               />
             </div>
-          )}
-          {actionType.value === 'reserve' && (
-            <div className="mt-4 ltr:xs:ml-6 rtl:xs:mr-6 ltr:sm:ml-12 rtl:sm:mr-12">
-              <Listbox
-                className="w-full sm:w-80"
-                options={reserveOptions}
-                selectedOption={reserveAction}
-                onChange={setReserveAction}
-              />
-            </div>
-          )}
+          )} */}
+
         </>
       </div>
-      <Button variant="ghost" className="mt-2 xs:mt-3">
+      {/* <Button variant="ghost" className="mt-2 xs:mt-3">
         Add another action
-      </Button>
+      </Button> */}
     </div>
   );
 }
 
 const CreateProposalPage: NextPageWithLayout = () => {
   const router = useRouter();
+  let [actionType, setActionType] = useState(actionOptions[0]);
+
   function goToAllProposalPage() {
     setTimeout(() => {
       router.push(routes.proposals);
@@ -298,40 +460,19 @@ const CreateProposalPage: NextPageWithLayout = () => {
           Create a new proposal
         </h2>
         <div className="mb-6 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
-          <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
+          {/* <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
             Actions
-          </h3>
-          <p className="mb-5 leading-[1.8] dark:text-gray-300">
+          </h3> */}
+          {/* <p className="mb-5 leading-[1.8] dark:text-gray-300">
             Enter the on-chain actions this proposal should take. Actions are
             executed in the order laid out here (ie. Action #1 fires, then
             Action #2, etc.)
-          </p>
+          </p> */}
           <ActionFields />
         </div>
-        <div className="mb-6 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
-          <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
-            Title
-          </h3>
-          <p className="mb-5 leading-[1.8] dark:text-gray-300">
-            Your title introduces your proposal to the voters. Make sure it is
-            clear and to the point.
-          </p>
-          <Input placeholder="Enter title of your proposal" />
-        </div>
-        <div className="mb-6 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
-          <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
-            Description
-          </h3>
-          <p className="mb-5 leading-[1.8] dark:text-gray-300">
-            Your description should present in full detail what the actions of
-            the proposal will do. This is where voters will educate themselves
-            on what they are voting on.
-          </p>
-          <Textarea
-            placeholder="Add the proposal details here"
-            inputClassName="md:h-32 xl:h-36"
-          />
-        </div>
+
+
+
         <div className="mt-6">
           <Button
             size="large"

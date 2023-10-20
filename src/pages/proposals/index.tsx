@@ -31,7 +31,7 @@ const ProposalsPage: NextPageWithLayout = () => {
     {
       title: (
         <>
-          Risk Mitigation Strategies
+          Risk Mitigation
           {totalActiveVote > 0 && (
             <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
               {totalActiveVote}
@@ -44,7 +44,7 @@ const ProposalsPage: NextPageWithLayout = () => {
     {
       title: (
         <>
-          Claim Processor
+          Claim Processing
           {totalOffChainVote > 0 && (
             <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
               {totalOffChainVote}
@@ -52,25 +52,12 @@ const ProposalsPage: NextPageWithLayout = () => {
           )}
         </>
       ),
-      path: 'off-chain',
+      path: 'claim',
     },
     {
       title: (
         <>
-          Risk Oracles{' '}
-          {totalExecutableVote > 0 && (
-            <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
-              {totalExecutableVote}
-            </span>
-          )}
-        </>
-      ),
-      path: 'executable',
-    },
-    {
-      title: (
-        <>
-          Solvency{' '}
+          Expired{' '}
           {totalPastVote > 0 && (
             <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
               {totalPastVote}
@@ -83,10 +70,10 @@ const ProposalsPage: NextPageWithLayout = () => {
   ];
   return (
     <>
-      <NextSeo
+      {/* <NextSeo
         title="Proposal"
         description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
-      />
+      /> */}
       <section className="mx-auto w-full max-w-[1160px] text-sm ">
         <header
           className={cn(
@@ -129,7 +116,7 @@ const ProposalsPage: NextPageWithLayout = () => {
           </TabPanel>
           <TabPanel className="focus:outline-none">
             <>
-              <div className="mb-6 rounded-lg border-2 border-gray-900 bg-white p-5 dark:border-gray-700 dark:bg-light-dark xs:py-6 lg:px-6 lg:py-6">
+              {/* <div className="mb-6 rounded-lg border-2 border-gray-900 bg-white p-5 dark:border-gray-700 dark:bg-light-dark xs:py-6 lg:px-6 lg:py-6">
                 <div className="mb-3 flex flex-col gap-3 xs:mb-4 sm:gap-4 md:flex-row md:items-center md:justify-between">
                   <h3 className="flex items-center gap-4 text-base font-semibold dark:text-gray-100">
                     <span className="inline-block rounded-3xl bg-gray-900 px-2.5 py-0.5 text-sm font-medium text-white">
@@ -162,13 +149,13 @@ const ProposalsPage: NextPageWithLayout = () => {
                   the POOL Pool . By doing so, you will be eligible to vote
                   gas-free and have a chance to win a weekly prize.
                 </p>
-              </div>
-              <VoteList voteStatus={'off-chain'} />
+              </div> */}
+              <VoteList voteStatus={'active'} />
             </>
           </TabPanel>
-          <TabPanel className="focus:outline-none">
+          {/* <TabPanel className="focus:outline-none">
             <VoteList voteStatus={'executable'} />
-          </TabPanel>
+          </TabPanel> */}
           <TabPanel className="focus:outline-none">
             <VoteList voteStatus={'past'} />
           </TabPanel>
