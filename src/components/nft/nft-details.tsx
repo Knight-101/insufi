@@ -80,23 +80,23 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                   <h3 className="text-heading-style mb-2 uppercase text-gray-900 dark:text-white">
                     Insuree
                   </h3>
-                  <AnchorLink href={creator?.slug} className="inline-flex">
+                  {/* <AnchorLink href={creator?.slug} className="inline-flex">
                     <ListCard
                       item={creator}
                       className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                     />
-                  </AnchorLink>
+                  </AnchorLink> */}
                 </div>
                 <div className="shrink-0 lg:px-6">
                   <h3 className="text-heading-style mb-2.5 uppercase text-gray-900 dark:text-white">
                     Insurer
                   </h3>
-                  <AnchorLink href="#" className="inline-flex">
+                  {/* <AnchorLink href="#" className="inline-flex">
                     <ListCard
                       item={collection}
                       className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                     />
-                  </AnchorLink>
+                  </AnchorLink> */}
                 </div>
               </div>
             </div>

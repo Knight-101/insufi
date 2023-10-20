@@ -430,17 +430,17 @@ const CreateProposalPage: NextPageWithLayout = () => {
                 You have 100 votes
               </h2>
               <p className="leading-[1.8] text-gray-600 dark:text-gray-400">
-                In order to submit a proposal you must have at least 10,000
-                CRIPTIC tokens <br className="hidden xl:inline-block" />{' '}
+                In order to submit a proposal you must have at least 100
+                REASSURE tokens <br className="hidden xl:inline-block" />{' '}
                 delegated to you{' '}
-                <a
+                {/* <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://medium.com/pooltogether/governance-101-fca9ab8b8ba2"
                   className="inline-flex items-center gap-2 text-gray-900 underline transition-opacity duration-200 hover:no-underline hover:opacity-90 dark:text-gray-100"
                 >
                   Learn more <ExportIcon className="h-auto w-3" />
-                </a>
+                </a> */}
               </p>
             </div>
           </div>

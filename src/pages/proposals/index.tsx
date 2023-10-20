@@ -95,7 +95,7 @@ const ProposalsPage: NextPageWithLayout = () => {
                 You have 100 votes
               </h2>
               <p className="leading-relaxed text-gray-600 dark:text-gray-400">
-                You need CRIPTIC or CRIPTIC tokens to participate in governance.
+                You need REASSURE tokens to participate in governance.
               </p>
             </div>
           </div>
