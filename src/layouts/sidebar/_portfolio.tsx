@@ -12,9 +12,10 @@ import { LivePriceFeed } from '@/components/ui/live-price-feed';
 import BitcoinImage from '@/assets/images/coin/bitcoin.svg';
 import { Bitcoin } from '@/components/icons/bitcoin';
 import { RadioGroup } from '@headlessui/react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import ListCard from '@/components/ui/list-card';
 import PooltoGether from '@/assets/images/portfolio/poolto-gether.svg';
+import { WalletContext } from '@/lib/hooks/use-connect';
 
 const priceFeed = {
     id: '0',
@@ -85,6 +86,7 @@ function RadioGroupOption({ value }: RadioOptionProps) {
 }
 
 export default function Sidebar({ className }: { className?: string }) {
+    const { address, connectToWallet, balance, } = useContext(WalletContext);
     const [status, setStatus] = useState('Month');
     // const [chartData, setChartData] = useState(monthlyComparison);
 
@@ -127,7 +129,7 @@ export default function Sidebar({ className }: { className?: string }) {
                                 My Balance
                             </h3>
                             <div className="mb-7 text-center font-medium tracking-tighter text-gray-900 dark:text-white xl:text-2xl 3xl:mb-8 3xl:text-[32px]">
-                                $10,86,000
+                                {parseFloat(balance).toFixed(6) + " ETH"}
                             </div>
                             <TopupButton className="mb-8" />
                             <div>

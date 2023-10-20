@@ -8,6 +8,14 @@ const withPWA = require('next-pwa')({
 });
 
 const nextConfig = withPWA({
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co',
+      },
+    ],
+  },
   reactStrictMode: true,
   ...(process.env.NODE_ENV === 'production' && {
     typescript: {

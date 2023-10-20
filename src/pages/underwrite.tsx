@@ -23,10 +23,10 @@ const CreateNFTPage: NextPageWithLayout = () => {
   // render default create NFT component
   return (
     <>
-      <NextSeo
+      {/* <NextSeo
         title="Create NFT"
         description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
-      />
+      /> */}
       <CreateNFT />
     </>
   );

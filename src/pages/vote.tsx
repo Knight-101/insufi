@@ -20,10 +20,10 @@ const VotePage: NextPageWithLayout = () => {
   const { layout } = useLayout();
   return (
     <>
-      <NextSeo
+      {/* <NextSeo
         title="Vote"
         description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
-      />
+      /> */}
       <div className="mx-auto w-full max-w-[1160px] text-sm md:pt-14 4xl:pt-24">
         <div
           className={cn('grid ', {

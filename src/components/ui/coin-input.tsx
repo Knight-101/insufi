@@ -62,12 +62,11 @@ export default function CoinInput({
             {label}
           </span>
           <button
-            onClick={() => setVisibleCoinList(true)}
             className="flex items-center font-medium outline-none dark:text-gray-100"
           >
             {selectedCoin?.icon}{' '}
             <span className="ltr:ml-2 rtl:mr-2">{selectedCoin?.code} </span>
-            <ChevronDown className="ltr:ml-1.5 rtl:mr-1.5" />
+            {/* <ChevronDown className="ltr:ml-1.5 rtl:mr-1.5" /> */}
           </button>
         </div>
         <div className="flex flex-1 flex-col text-right">

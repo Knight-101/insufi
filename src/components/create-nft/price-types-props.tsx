@@ -16,7 +16,7 @@ const ClaimOptions = [
   },
   {
     name: 'TOKEN HOLDER VOTING',
-    value: 'voting',
+    value: "holder_votes",
     icon: <SandClock className="h-5 w-5 sm:h-auto sm:w-auto" />,
   },
 ];

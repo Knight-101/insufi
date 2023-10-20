@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import cn from 'classnames';
 import { NextSeo } from 'next-seo';
 import { Transition } from '@/components/ui/transition';
@@ -22,6 +22,9 @@ import Avatar from '@/components/ui/avatar';
 import AuthorImage from '@/assets/images/author.jpg';
 import NFT1 from '@/assets/images/nft/nft-1.jpg';
 import ClaimType from '@/components/create-nft/price-types-props';
+import axios from 'axios';
+import tokenLogo from "@/assets/images/Token Logo Goes Here.png"
+import suiLogo from "@/assets/images/sui-sui-logo.png"
 
 const BlockchainOptions = [
   {
@@ -35,10 +38,41 @@ const BlockchainOptions = [
 
 export default function CreateNFT() {
   let [publish, setPublish] = useState(true);
+  let [files, setFiles] = useState([]);
   let [explicit, setExplicit] = useState(false);
   let [unlocked, setUnlocked] = useState(false);
   let [claimType, setClaimType] = useState('self');
+  let [formData, setFormData] = useState({});
   let [blockchain, setBlockChain] = useState(BlockchainOptions[0]);
+
+  async function readData() {
+    const data = new FormData();
+    data.append('file', files[0]);
+    try {
+      const config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: 'https://def1-122-172-83-203.ngrok-free.app/underwrite/autocomplete',
+        headers: {
+          "Content-type": "multipart/form-data",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "*"
+          // "Access-Control-Allow-Credentials": true,
+        },
+        data: data,
+      };
+
+      const response = await axios.request(config);
+      response && setFormData(response.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  console.log(files)
+  useEffect(() => {
+    files.length > 0 && readData()
+  }, [files])
+
   return (
     <>
       <div className="mx-auto w-full sm:pt-0 lg:px-8 xl:px-10 2xl:px-0">
@@ -50,7 +84,7 @@ export default function CreateNFT() {
             {/* File uploader */}
             <div className="mb-8">
               <InputLabel title="Upload file" important />
-              <Uploader />
+              <Uploader setFiles={setFiles} />
             </div>
 
             {/* NFT price type */}
@@ -68,21 +102,26 @@ export default function CreateNFT() {
             <InputLabel title="Preview" />
             <div className="relative flex flex-grow flex-col overflow-hidden rounded-lg bg-white shadow-card transition-all duration-200 hover:shadow-large dark:bg-light-dark">
               <div className="flex items-center p-4 text-sm font-medium text-gray-600 transition hover:text-gray-900 dark:text-gray-400">
-                <Avatar
+                {formData?.["insurer"]?.["logo"] && <Avatar
                   size="sm"
-                  image={AuthorImage}
-                  alt="Cameronwilliamson"
+                  width={50}
+                  height={50}
+                  image={{
+                    src: formData?.["insurer"]?.["logo"],
+                    height: 10,
+                    width: 10
+                  }}
+                  alt="Insurer"
                   className="border-white bg-gray-300 ltr:mr-3 rtl:ml-3 dark:bg-gray-400"
-                />
+                />}
                 Insurer
               </div>
               <div className="relative block w-full pb-full">
                 <Image
-                  src={NFT1}
-                  placeholder="blur"
+                  src={formData?.["insuree"] ? formData?.["insuree"]?.["logo"] : tokenLogo}
                   layout="fill"
                   objectFit="cover"
-                  alt="Pulses of Imagination #214"
+                  alt="Insuree Image"
                 />
               </div>
               <div className="p-5">
@@ -102,16 +141,17 @@ export default function CreateNFT() {
           <InputLabel title="Premium Amount" important />
           <Input
             min={0}
-            type="number"
-            placeholder="Enter your price"
+            type="text"
+            placeholder="Enter your premium amount"
             inputClassName="spin-button-hidden"
+            value={formData?.["policy_premium"]}
           />
         </div>
 
         {/* Name */}
         <div className="mb-8">
           <InputLabel title="Policy Expiry" important />
-          <Input type="text" placeholder="Item name" />
+          <Input type="text" placeholder="Enter your policy expiry date" value={formData?.["policy_expiry"]} />
         </div>
 
         {/* External link */}
@@ -120,7 +160,7 @@ export default function CreateNFT() {
             title="Coverage Amount"
             subTitle="Mention the maximum coverage amount of this policy (mentioned at the time of sales) along with maximum amount per claim, maximum amount for copay and so on."
           />
-          <Input type="text" placeholder="https://yoursite.io/item/123" />
+          <Input value={formData?.["coverage_amt"]} type="text" placeholder="" />
         </div>
 
         {/* Description */}
@@ -129,7 +169,7 @@ export default function CreateNFT() {
             title="Coverage Details"
             subTitle="Itemized details on coverage specifics with payment limit per billable item, disbursal conditions, payout schedules, dispute resolution and jurisdiction information."
           />
-          <Textarea placeholder="Provide a detailed description of your item" />
+          <Textarea value={formData?.["coverage_details"]} placeholder="Provide a detailed description of coverage" />
         </div>
 
         {/* Unlockable content */}
@@ -181,12 +221,19 @@ export default function CreateNFT() {
             <Listbox value={blockchain} onChange={setBlockChain}>
               <Listbox.Button className="text-case-inherit letter-space-inherit flex h-10 w-full items-center justify-between rounded-lg border border-gray-200 bg-white px-4 text-sm font-medium text-gray-900 outline-none transition-shadow duration-200 hover:border-gray-900 hover:ring-1 hover:ring-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:hover:border-gray-600 dark:hover:ring-gray-600 sm:h-12 sm:px-5">
                 <div className="flex items-center">
-                  <span className="ltr:mr-2 rtl:ml-2">{blockchain.icon}</span>
+                  <span className="ltr:mr-2 rtl:ml-2">
+                    <Image
+                      src={suiLogo}
+                      width={27}
+                      height={27}
+                      objectFit="cover"
+                      alt="Insuree Image"
+                    /></span>
                   {blockchain.name}
                 </div>
-                <ChevronDown />
+                {/* <ChevronDown /> */}
               </Listbox.Button>
-              <Transition
+              {/* <Transition
                 leave="transition ease-in duration-100"
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
@@ -210,7 +257,7 @@ export default function CreateNFT() {
                     </Listbox.Option>
                   ))}
                 </Listbox.Options>
-              </Transition>
+              </Transition> */}
             </Listbox>
           </div>
         </div>
@@ -220,3 +267,22 @@ export default function CreateNFT() {
     </>
   );
 }
+
+// {
+//   "claim_processor": "holder_votes",
+//     "coverage_amt": "The coverage amount for this policy is USD 1,000,000.",
+//       "coverage_details": "The coverage details include itemized details on coverage specifics, payment limit per billable item, disbursal conditions, payout schedules, dispute resolution, and jurisdiction information.",
+//         "insuree": {
+//     "logo": "https://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png",
+//       "name": "Allianz SE",
+//         "site": "https://about.google.com"
+//   },
+//   "insurer": {
+//     "logo": "https://i.ibb.co/hgr21ZC/ALV-DE-D.png",
+//       "name": "The insuree in this policy is not mentioned in the provided context.",
+//         "site": "https://www.allianz.com/en.html"
+//   },
+//   "policy_doc_url": "https://www.allianz.com/policies/meta12345.pdf",
+//     "policy_expiry": "October 19, 2024",
+//       "policy_premium": "USD 100,000"
+// }

@@ -18,7 +18,7 @@ export const menuItems = [
   {
     name: 'Marketplace',
     icon: <FarmIcon />,
-    href: routes.farms,
+    href: routes.marketplace,
   },
   // {
   //   name: 'Swap',
@@ -38,7 +38,7 @@ export const menuItems = [
   {
     name: 'Underwrite',
     icon: <PlusCircle />,
-    href: routes.createNft,
+    href: routes.underwrite,
   },
   // {
   //   name: 'NFT Details',
@@ -48,7 +48,7 @@ export const menuItems = [
   {
     name: 'Portfolio',
     icon: <ProfileIcon />,
-    href: routes.profile,
+    href: routes.portfolio,
   },
   {
     name: 'Risk Management',

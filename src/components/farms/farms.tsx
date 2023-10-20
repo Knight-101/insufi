@@ -15,6 +15,7 @@ import { useLayout } from '@/lib/hooks/use-layout';
 import { LAYOUT_OPTIONS } from '@/lib/constants';
 import HorizontalThreeDots from '@/components/icons/horizontal-three-dots';
 import routes from '@/config/routes';
+import axios from 'axios';
 
 const sort = [
   { id: 1, name: 'Hot' },
@@ -172,6 +173,23 @@ function Status() {
 }
 
 export default function Farms() {
+  let config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: 'https://def1-122-172-83-203.ngrok-free.app/marketplace/list',
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "*"
+    }
+  };
+
+  axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   return (
     <div className="mx-auto w-full">
       <div

@@ -35,10 +35,10 @@ const NFTDetailsPage: NextPageWithLayout<
 
   return (
     <>
-      <NextSeo
+      {/* <NextSeo
         title="NFT details"
         description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
-      />
+      /> */}
       <NftDetails product={nftData} />
     </>
   );

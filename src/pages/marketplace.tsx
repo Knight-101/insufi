@@ -6,10 +6,10 @@ import Farms from '@/components/farms/farms';
 const FarmsPage: NextPageWithLayout = () => {
   return (
     <>
-      <NextSeo
+      {/* <NextSeo
         title="Farms"
         description="Criptic - React Next Web3 NFT Crypto Dashboard Template"
-      />
+      /> */}
       <Farms />
     </>
   );

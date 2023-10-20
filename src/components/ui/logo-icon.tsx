@@ -3,7 +3,7 @@ import AnchorLink from '@/components/ui/links/anchor-link';
 import { useIsMounted } from '@/lib/hooks/use-is-mounted';
 import { useIsDarkMode } from '@/lib/hooks/use-is-dark-mode';
 import lightLogo from '@/assets/images/logo-icon.svg';
-import darkLogo from '@/assets/images/logo-icon-white.png';
+import newLogo from '@/assets/images/logo_website_dark.png';
 
 const Logo: React.FC<React.SVGAttributes<{}>> = (props) => {
   const isMounted = useIsMounted();
@@ -12,12 +12,12 @@ const Logo: React.FC<React.SVGAttributes<{}>> = (props) => {
   return (
     <div className="flex cursor-pointer outline-none" {...props}>
       <span className="relative flex overflow-hidden">
-        {isMounted && isDarkMode && (
-          <Image src={darkLogo} alt="Criptic" priority />
+        {isMounted && (
+          <Image src={newLogo} alt="ReAssure" priority />
         )}
-        {isMounted && !isDarkMode && (
+        {/* {isMounted && !isDarkMode && (
           <Image src={lightLogo} alt="Criptic" priority />
-        )}
+        )} */}
       </span>
     </div>
   );
