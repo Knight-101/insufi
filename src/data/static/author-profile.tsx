@@ -14,24 +14,13 @@ export const authorWallets = [
     id: 2,
     name: 'POLICY TOKENS',
     logo: Nft,
-    balance: '$152.00',
-  },
-  {
-    id: 3,
-    name: 'UNCLAIMED PREMIUMS',
-    logo: Deposit,
-    balance: '$2,215.43',
-  },
-  {
-    id: 4,
-    name: 'CLAIMS',
-    logo: Claimable,
-    balance: '$150.60',
+    balance: '$100.00',
   },
 ];
 
 // Profile Protocols Data
 import PooltoGether from '@/assets/images/portfolio/poolto-gether.svg';
+import GfcLogo from '@/assets/images/gfc.png';
 import Uniswap from '@/assets/images/portfolio/uniswap.svg';
 import Pancake from '@/assets/images/portfolio/pancake.svg';
 import Curve from '@/assets/images/portfolio/curve.svg';
@@ -39,32 +28,11 @@ import Curve from '@/assets/images/portfolio/curve.svg';
 export const authorProtocols = [
   {
     id: 1,
-    name: 'POOLTOGETHER',
-    coinType: 'Ethereum',
-    logo: PooltoGether,
-    balance: '$2,215.43',
-  },
-  {
-    id: 2,
-    name: 'CURVE',
-    coinType: 'Ethereum',
-    logo: Curve,
-    balance: '$2,215.43',
-  },
-  {
-    id: 3,
-    name: 'UNISWAP',
-    coinType: 'Ethereum',
-    logo: Uniswap,
-    balance: '$2,215.43',
-  },
-  {
-    id: 4,
-    name: 'PANCAKE SWAP',
-    coinType: 'BSC',
-    logo: Pancake,
-    balance: '$2,215.43',
-  },
+    name: 'ALP',
+    coinType: 'Alphabet Inc.',
+    logo: GfcLogo,
+    balance: '$100.00',
+  }
 ];
 
 // Profile Protocols Data
@@ -73,15 +41,9 @@ import Ethereum from '@/assets/images/currency/ethereum.svg';
 export const authorNetworks = [
   {
     id: 1,
-    name: 'BTC',
+    name: 'Allianz',
     logo: Bitcoin,
-    balance: '$2,518.78',
-  },
-  {
-    id: 2,
-    name: 'ETH',
-    logo: Ethereum,
-    balance: '$152.00',
+    balance: '$100.00',
   },
 ];
 

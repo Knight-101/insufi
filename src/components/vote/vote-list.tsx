@@ -10,7 +10,7 @@ export default function VoteList({ voteStatus }: { voteStatus: string }) {
   return (
     <AnimateSharedLayout>
       <motion.div layout initial={{ borderRadius: 16 }} className="rounded-2xl">
-        {totalVote > 0 ? (
+        {totalVote < 0 ? (
           votes.map((vote: any) => (
             <VoteDetailsCard key={`${vote.title}-key-${vote.id}`} vote={vote} />
           ))

@@ -6,6 +6,7 @@ import TransactCoin from '@/components/ui/transact-coin';
 import WalletCard from '@/components/ui/wallet-card-two';
 import { motion } from 'framer-motion';
 //images
+import GfcLogo from '@/assets/images/gfc.png';
 import AuthorImage from '@/assets/images/author.jpg';
 import ComparisonChart from '@/components/ui/chats/retro-comparision-chart';
 import { LivePriceFeed } from '@/components/ui/live-price-feed';
@@ -44,20 +45,20 @@ const priceFeed = {
 
 const bestPerformer =
 {
+
     id: 1,
-    name: 'POOLTOGETHER',
-    coinType: 'Ethereum',
-    logo: PooltoGether,
-    balance: '$2,215.43',
+    name: 'ALP',
+    coinType: 'Alphabet Inc.',
+    logo: GfcLogo,
+    balance: '$100.00',
 }
 
 const bestUnderwriter =
 {
     id: 1,
-    name: 'BTC',
-    logo: BitcoinImage,
-    balance: '$2,518.78',
-
+    name: 'Allianz',
+    logo: Bitcoin,
+    balance: '$100.00',
 }
 
 interface RadioOptionProps {
@@ -129,7 +130,7 @@ export default function Sidebar({ className }: { className?: string }) {
                                 My Balance
                             </h3>
                             <div className="mb-7 text-center font-medium tracking-tighter text-gray-900 dark:text-white xl:text-2xl 3xl:mb-8 3xl:text-[32px]">
-                                {parseFloat(balance).toFixed(6) + " ETH"}
+                                {"$2,518.78"}
                             </div>
                             <TopupButton className="mb-8" />
                             <div>

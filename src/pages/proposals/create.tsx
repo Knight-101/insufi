@@ -425,7 +425,7 @@ const CreateProposalPage: NextPageWithLayout = () => {
     "token": {
       "name": "Alphabet Inc. Cloud SLA FY24",
       "logo": "https://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png",
-      "symbol": "GFC"
+      "symbol": "ALP"
     }
   });
 
@@ -471,13 +471,11 @@ const CreateProposalPage: NextPageWithLayout = () => {
               <Image alt="Vote Pool" src={votePool} width={32} height={32} />
             </div>
             <div>
-              <h2 className="mb-2 text-base font-medium uppercase dark:text-gray-100 xl:text-lg">
+              {/* <h2 className="mb-2 text-base font-medium uppercase dark:text-gray-100 xl:text-lg">
                 You have 100 votes
-              </h2>
+              </h2> */}
               <p className="leading-[1.8] text-gray-600 dark:text-gray-400">
-                In order to submit a proposal you must have at least 100
-                REASSURE tokens <br className="hidden xl:inline-block" />{' '}
-                delegated to you{' '}
+                You can create risk oracles to bring community awareness or create proposals for voting on risk mitigation strategy and settlement procedures
                 {/* <a
                   target="_blank"
                   rel="noopener noreferrer"

@@ -80,7 +80,7 @@ export default function CoinInput({
 
                   alt="Token"
                 /></span>
-              {"GFC"}
+              {"ALP"}
             </div>
           }
         </div>

@@ -44,6 +44,7 @@ const DeepbookLogo = (props: SVGProps<SVGSVGElement>) => (
 
 export default function SwapCard() {
     let [toggleCoin, setToggleCoin] = useState(false);
+    let [usdV, setUsdV] = useState("");
     return (
         <div className="h-fit items-center rounded-lg bg-white p-5 pt-4 shadow-card dark:bg-light-dark xs:p-6 xs:pt-5">
 
@@ -76,27 +77,29 @@ export default function SwapCard() {
                         label={'To'}
                         exchangeRate={0.0}
                         defaultCoinIndex={1}
-                        getCoinValue={(data) => console.log('To coin value:', data)}
+                    // getCoinValue={}
                     />
                 </div>
             </div>
             <div className="flex flex-col gap-4 xs:gap-[18px]">
-                <TransactionInfo label={'Min. Received'} />
-                <TransactionInfo label={'Rate'} />
+                <TransactionInfo label={'Min. Received'} value={usdV} />
+                <TransactionInfo label={'Rate'} value={"$1"} />
                 <TransactionInfo label={'Offered by'} />
                 <TransactionInfo label={'Price Slippage'} value={'1%'} />
-                <TransactionInfo label={'Network Fee'} />
-                <TransactionInfo label={'Deepbook Fee'} />
+                <TransactionInfo label={'Network Fee'} value={"0.01%"} />
+                <TransactionInfo label={'Deepbook Fee'} value={"0.01%"} />
             </div>
             <NextLink href="/portfolio">
-                <Button
-                    size="large"
-                    shape="rounded"
-                    fullWidth={true}
-                    className="my-6 uppercase xs:mt-8 xs:tracking-widest"
-                >
-                    BUY
-                </Button>
+                <a href="https://suiexplorer.com/object/0xf536a228ed9cf3c14b474b48244d7be893dfe3f8d4b7065fa6ac8b8c7bcbea7e?module=projectcoin&network=devnet" target='_blank'>
+                    <Button
+                        size="large"
+                        shape="rounded"
+                        fullWidth={true}
+                        className="my-6 uppercase xs:mt-8 xs:tracking-widest"
+                    >
+                        BUY
+                    </Button>
+                </a>
             </NextLink>
             <div className="flex items-center justify-center gap-4">
                 <p className="text-xs mt-4">

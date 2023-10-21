@@ -63,7 +63,7 @@ export default function FarmList({
             </span> */}
           </div>
           <div className="hidden px-4 text-xs font-medium uppercase tracking-wider text-black dark:text-white sm:px-8 sm:text-sm lg:block">
-            {liquidity}
+            {"$" + liquidity}
           </div>
           <div className="hidden px-4 text-xs font-medium uppercase tracking-wider text-black dark:text-white sm:px-8 sm:text-sm lg:block">
             {new Date(validity).toDateString()}

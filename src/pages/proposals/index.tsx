@@ -32,11 +32,11 @@ const ProposalsPage: NextPageWithLayout = () => {
       title: (
         <>
           Risk Mitigation
-          {totalActiveVote > 0 && (
+          {/* {totalActiveVote > 0 && (
             <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
               {totalActiveVote}
             </span>
-          )}
+          )} */}
         </>
       ),
       path: 'active',
@@ -58,11 +58,11 @@ const ProposalsPage: NextPageWithLayout = () => {
       title: (
         <>
           Expired{' '}
-          {totalPastVote > 0 && (
+          {/* {totalPastVote > 0 && (
             <span className="ltr:ml-0.5 rtl:mr-0.5 ltr:md:ml-1.5 rtl:md:mr-1.5 ltr:lg:ml-2 rtl:lg:mr-2">
               {totalPastVote}
             </span>
-          )}
+          )} */}
         </>
       ),
       path: 'past',
@@ -91,11 +91,11 @@ const ProposalsPage: NextPageWithLayout = () => {
               <Image alt="Vote Pool" src={votePool} width={32} height={32} />
             </div>
             <div>
-              <h2 className="mb-2 text-base font-medium uppercase dark:text-gray-100 xl:text-lg">
+              {/* <h2 className="mb-2 text-base font-medium uppercase dark:text-gray-100 xl:text-lg">
                 You have 100 votes
-              </h2>
+              </h2> */}
               <p className="leading-relaxed text-gray-600 dark:text-gray-400">
-                You need REASSURE tokens to participate in governance.
+                You can create risk oracles to bring community awareness or create proposals for voting on risk mitigation strategy and settlement procedures
               </p>
             </div>
           </div>

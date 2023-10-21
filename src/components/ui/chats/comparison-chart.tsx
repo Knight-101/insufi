@@ -125,7 +125,7 @@ export default function ComparisonChart() {
                   toggleCoin ? 'flex-row-reverse' : 'flex-row'
                 )}
               >
-                <span>GFC</span>/<span>USDC</span>
+                <span>ALP</span>/<span>USDC</span>
               </span>
               {/* <Button
                 size="mini"

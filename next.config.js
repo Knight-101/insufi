@@ -22,6 +22,10 @@ const nextConfig = withPWA({
         protocol: 'https',
         hostname: 'abcinsurance.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'companieslogo.com',
+      },
     ],
   },
   reactStrictMode: true,

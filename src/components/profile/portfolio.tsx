@@ -46,7 +46,7 @@ export default function Portfolio() {
                 </div>
                 <div className="block">
                     <h3 className="text-heading-style mb-3 uppercase text-gray-900 dark:text-white">
-                        Protocols
+                        Insuree
                     </h3>
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
                         {authorProtocols?.map((protocol) => (
@@ -60,7 +60,7 @@ export default function Portfolio() {
                 </div>
                 <div className="block">
                     <h3 className="text-heading-style mb-3 uppercase text-gray-900 dark:text-white">
-                        Networks
+                        Underwrite
                     </h3>
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4">
                         {authorNetworks?.map((network) => (

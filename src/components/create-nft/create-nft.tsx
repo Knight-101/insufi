@@ -27,6 +27,7 @@ import tokenLogo from "@/assets/images/Token Logo Goes Here.png"
 import suiLogo from "@/assets/images/sui-sui-logo.png"
 import Loader from '../ui/loader';
 import { useRouter } from 'next/router';
+import ActiveLink from '../ui/links/active-link';
 
 const BlockchainOptions = [
   {
@@ -44,6 +45,7 @@ export default function CreateNFT() {
   let [explicit, setExplicit] = useState(false);
   let [unlocked, setUnlocked] = useState(false);
   let [claimType, setClaimType] = useState('self');
+  let [created, setCreated] = useState(false);
   let [formData, setFormData] = useState({});
   let [loader, setLoader] = useState(false)
   let [blockchain, setBlockChain] = useState(BlockchainOptions[0]);
@@ -118,7 +120,6 @@ export default function CreateNFT() {
       });
     setLoader(false)
     router.push("/marketplace")
-
   }
   useEffect(() => {
     files.length > 0 && readData()
@@ -158,7 +159,7 @@ export default function CreateNFT() {
               <InputLabel title="Preview" />
               <div className="relative flex flex-grow flex-col overflow-hidden rounded-lg bg-white shadow-card transition-all duration-200 hover:shadow-large dark:bg-light-dark">
                 <div className="flex items-center p-4 text-sm font-medium text-gray-600 transition hover:text-gray-900 dark:text-gray-400">
-                  {formData?.["insurer"]?.["logo"] && <Avatar
+                  {formData?.["insuree"] && <Avatar
                     size="sm"
                     width={50}
                     height={50}
@@ -170,19 +171,19 @@ export default function CreateNFT() {
                     alt="Insurer"
                     className="border-white bg-gray-300 ltr:mr-3 rtl:ml-3 dark:bg-gray-400"
                   />}
-                  {formData?.["insurer"]?.["name"] ? formData?.["insurer"]?.["name"] : "Insurer"}
+                  {formData?.["insuree"]?.["name"] ? formData?.["insuree"]?.["name"] : "Insurer"}
                 </div>
                 <div className="relative block w-full pb-full">
                   <Image
                     src={formData?.["insuree"] ? formData?.["insuree"]?.["logo"] : tokenLogo}
                     layout="fill"
                     objectFit="cover"
-                    alt="Insuree Image"
+                    alt="Insurer Image"
                   />
                 </div>
                 <div className="p-5">
                   <div className="text-sm font-medium text-black dark:text-white">
-                    {formData?.["insuree"]?.["name"] ? formData?.["insuree"]?.["name"] : "Insurer"}
+                    {formData?.["insurer"]?.["name"] ? "Alphabet Inc." : "Insurer"}
                   </div>
                   <div className="mt-4 text-lg font-medium text-gray-900 dark:text-white">
                     1 $
@@ -317,8 +318,11 @@ export default function CreateNFT() {
               </Listbox>
             </div>
           </div>
+          <a href="https://suiexplorer.com/object/0xf536a228ed9cf3c14b474b48244d7be893dfe3f8d4b7065fa6ac8b8c7bcbea7e?module=projectcoin&network=devnet" target='_blank'>
+            <Button onClick={submit} shape="rounded">UNDERWRITE NOW</Button>
+          </a>
 
-          <Button onClick={submit} shape="rounded">UNDERWRITE NOW</Button>
+          {/* <ActiveLink href="" >Created Here</ActiveLink> */}
         </div >
       }
     </>
