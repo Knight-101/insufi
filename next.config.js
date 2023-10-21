@@ -14,6 +14,10 @@ const nextConfig = withPWA({
         protocol: 'https',
         hostname: 'i.ibb.co',
       },
+      {
+        protocol: 'https',
+        hostname: 'assets.stickpng.com',
+      },
     ],
   },
   reactStrictMode: true,

@@ -176,7 +176,7 @@ export default function Farms() {
   let config = {
     method: 'get',
     maxBodyLength: Infinity,
-    url: 'https://def1-122-172-83-203.ngrok-free.app/marketplace/list',
+    url: 'https://8e7c-122-172-83-203.ngrok-free.app/marketplace/list',
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers": "*"
