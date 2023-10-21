@@ -26,6 +26,7 @@ import axios from 'axios';
 import tokenLogo from "@/assets/images/Token Logo Goes Here.png"
 import suiLogo from "@/assets/images/sui-sui-logo.png"
 import Loader from '../ui/loader';
+import { useRouter } from 'next/router';
 
 const BlockchainOptions = [
   {
@@ -46,6 +47,7 @@ export default function CreateNFT() {
   let [formData, setFormData] = useState({});
   let [loader, setLoader] = useState(false)
   let [blockchain, setBlockChain] = useState(BlockchainOptions[0]);
+  const router = useRouter()
 
   async function readData() {
     setLoader(true)
@@ -77,7 +79,7 @@ export default function CreateNFT() {
     let data = JSON.stringify({
       "insurer": {
         "name": "Allianz Inc.",
-        "logo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD60lEQVR4AcWXA9B1NxCGt7Zt2zo5qG1b445q+ya5tTGobbdjVMO6v23bdp75MzuXn5GZnZuz2X3fvclmk0gb2jpyqt1cUru3GH+tGPumpO7PIFPFuKWC0EfHGDbY4oNvp1pmt5XEXhpA3w0EE8PvqkC4ukXBBlt8kvKlYHSA2a4r6WNFAPlcUj9NwRO3MvwOEWO/D/rXQ/8phD66tWPYRHt8UzB8AWbbuK/6aj3Jy1cGgOEVYPMDwcdBTpQT7M5ytN1ajrObhmneGKGPjjExT5woifsEH3zBAEsydxXYrZObEuRzovNiSd1vknojsnodTALh+nKY3bBS6v4dtvgY9zsYYIEJdtMgACHKCvLJYqyLyaQt6K+QzD+uktpHJXFXBbut6yCLZ7cI9h4sDQKORsvBmsdpJ5GmBNDbmN56O/dFg+QbF4DPaJzId20iqb892EzFFg5yoi7bSZa4XktD/1nJXtpEGjWIjP++JoAFwiw0a+SIcc+BDQdccOo+Z6tVZPu/kjy0nY7FJENY7zgL11SsLbJQA8Am2uOrtSB5arvg91+0ny5sUcZYY/ZsnPplYsrna+R5+Wwh8tS+Jogp3Si01F8NacMAUneD2uObuXMUL3EXCBz4wAk3VYvCEff5b3LcLRsIrbh/i2DUp6bIfNiGAD6o0CN9xdgthXbcmxsIHOjhhJvSWVHhbtJoT3hu5/A9ofMB+AlSlHZV3MTfrBUzcdcJ9Tsq5kn+xF5qeNKTu+DcBTMwUbIndpPY4IArjr2Fw5/x4x/JSzt2dwBwwBWX4S8cpsaPnygm3R4AHMb/yBjcEvdm+LCfkizdHgAcqfuEMbh7PwBdgqSXloBE6IUk/FuTkK0QDXtwG7q5ug0pBpWFqPtzwN8oWoieuE7iZXPSWqX9lVLcbQFwmTHuF/Rwwh1rvnsvGi8TUzq/mwJg7Dw40MMJN+p1OBo5IiPJP5zVXR4AmCS6HsfuMj2qGeSmoxeSxD0j6dN7h1/O70kqiXstklwUvkeqnj46mnGvVPlwBzi5vI8Y+7Skfgkcktov66/rxnKbHREjnBLkDinKB0le3k8lblPOcTnB7qv6JBCc/fxmus0qfMAAS++FcMDV8FLK1OoW8URfUuCOtLPv3SwQljTJweY2BVfTazm3Vg2Ca5f/VXJ/QjufWevggy8YSg42O6G1twEzEZdjpRYpYz+UE2xe9TA577WNEPpy3DNbMYYNtvjowwQs/jnkbX2asU4xMadXP838oCDfkpCS2icR+uiCzSBs1B5fEg4sMDvyOI1b9D3Wsc2PU2zx0cdp59o6FAyqFmWb+s0h0uB5/hdj2GCLT1vyZg0ok/JhTx3URwAAAABJRU5ErkJggg==",
+        "logo": "https://companieslogo.com/img/orig/ALV.DE-78cd6600.png?t=1633505271",
         "site": "https://www.allianz.com/en.html",
         "pub_key": "0x2b39f5e64ba1d00b3538ba5a7a079c7884e97c0b61626e7a705defc9c96ccb24"
       },
@@ -100,7 +102,7 @@ export default function CreateNFT() {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'http://127.0.0.1:5000/underwrite/save',
+      url: 'https://8e7c-122-172-83-203.ngrok-free.app/underwrite/save',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -114,6 +116,9 @@ export default function CreateNFT() {
       .catch((error) => {
         console.log(error);
       });
+    setLoader(false)
+    router.push("/marketplace")
+
   }
   useEffect(() => {
     files.length > 0 && readData()
