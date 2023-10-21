@@ -4,28 +4,29 @@ import CurrencySwapIcons from '@/components/ui/currency-swap-icons';
 import { CoinList } from '@/components/ui/currency-swap-icons';
 import TransactionInfo from '@/components/ui/transaction-info';
 import NextLink from 'next/link';
+import Image from '../ui/image';
 
 interface FarmListTypes {
   from: string;
-  to: string;
-  earned: string;
-  apr: string;
-  liquidity: string;
-  multiplier: string;
+  token: {};
+  apy: number,
+  validity: number,
+  underwriter: string,
+  liquidity: number,
 }
 
 export default function FarmList({
   from,
-  to,
-  earned,
-  apr,
+  token,
+  apy,
+  validity,
+  underwriter,
   liquidity,
-  multiplier,
   children,
 }: React.PropsWithChildren<FarmListTypes>) {
   let [isExpand, setIsExpand] = useState(false);
-  const setFrom = from as CoinList;
-  const setTo = to as CoinList;
+  // const setFrom = from as CoinList;
+  // const setTo = to as CoinList;
   return (
     <NextLink href={"/nft-details"} >
       <div className="relative mb-3 overflow-hidden rounded-lg bg-white shadow-card transition-all last:mb-0 hover:shadow-large dark:bg-light-dark">
@@ -33,29 +34,39 @@ export default function FarmList({
           className="relative grid h-auto cursor-pointer grid-cols-2 items-center gap-3 py-4 sm:h-20 sm:grid-cols-3 sm:gap-6 sm:py-0 lg:grid-cols-5"
           onClick={() => setIsExpand(!isExpand)}
         >
-          <div className="col-span-2 px-4 sm:col-auto sm:px-8 xl:px-4">
-            <CurrencySwapIcons from={setFrom} to={setTo} />
+          <div className="col-span-2 flex items-center gap-4 text-lg px-4 sm:col-auto sm:px-8 xl:px-4">
+            {/* <CurrencySwapIcons from={setFrom} to={setTo} /> */}
+            <span>
+              <Image
+                src={token?.logo}
+                width={27}
+                height={27}
+                objectFit="cover"
+                alt="Insuree Image"
+              /></span>
+            {token?.symbol}
+            {/* </div> */}
           </div>
           <div className="px-4 text-xs font-medium uppercase tracking-wider text-black dark:text-white sm:px-8 sm:text-sm">
             <span className="mb-1 block font-medium text-gray-600 dark:text-gray-400 sm:hidden">
-              Earned
+              Underwriter
             </span>
-            {earned}
+            {underwriter?.name}
           </div>
           <div className="px-4 text-xs font-medium uppercase tracking-wider text-black dark:text-white sm:px-8 sm:text-sm">
             <span className="mb-1 block font-medium text-gray-600 dark:text-gray-400 sm:hidden">
-              APR
+              APY
             </span>
-            {apr}
-            <span className="hidden font-normal text-gray-600 dark:text-gray-400 sm:block">
-              Annualized
-            </span>
+            {apy + "%"}
+            {/* <span className="hidden font-normal text-gray-600 dark:text-gray-400 sm:block">
+              Liquidity
+            </span> */}
           </div>
           <div className="hidden px-4 text-xs font-medium uppercase tracking-wider text-black dark:text-white sm:px-8 sm:text-sm lg:block">
             {liquidity}
           </div>
           <div className="hidden px-4 text-xs font-medium uppercase tracking-wider text-black dark:text-white sm:px-8 sm:text-sm lg:block">
-            {multiplier}
+            {new Date(validity).toDateString()}
           </div>
         </div>
         {/* <AnimatePresence initial={false}>
@@ -95,6 +106,6 @@ export default function FarmList({
         )}
       </AnimatePresence> */}
       </div>
-    </NextLink>
+    </NextLink >
   );
 }

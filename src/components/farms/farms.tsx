@@ -2,7 +2,7 @@ import Button from '@/components/ui/button';
 import FarmList from '@/components/farms/list';
 import ActiveLink from '@/components/ui/links/active-link';
 import { FarmsData } from '@/data/static/farms-data';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import cn from 'classnames';
 import { Transition } from '@/components/ui/transition';
@@ -16,12 +16,11 @@ import { LAYOUT_OPTIONS } from '@/lib/constants';
 import HorizontalThreeDots from '@/components/icons/horizontal-three-dots';
 import routes from '@/config/routes';
 import axios from 'axios';
+import Loader from '../ui/loader';
 
 const sort = [
   { id: 1, name: 'Hot' },
-  { id: 2, name: 'APR' },
-  { id: 3, name: 'Earned' },
-  { id: 4, name: 'Total staked' },
+  { id: 2, name: 'APY' },
   { id: 5, name: 'Latest' },
 ];
 
@@ -86,7 +85,7 @@ function Search() {
     >
       <label className="flex w-full items-center">
         <input
-          className="h-11 w-full appearance-none rounded-lg border-2 border-gray-200 bg-transparent py-1 text-sm tracking-tighter text-gray-900 outline-none transition-all placeholder:text-gray-600 focus:border-gray-900 ltr:pr-5 ltr:pl-10 rtl:pr-10 dark:border-gray-600 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-gray-500"
+          className="h-11 w-full appearance-none rounded-lg border-2 border-gray-200 bg-transparent py-1 text-sm tracking-tighter text-gray-900 outline-none transition-all placeholder:text-gray-600 focus:border-gray-900 ltr:pl-10 ltr:pr-5 rtl:pr-10 dark:border-gray-600 dark:text-white dark:placeholder:text-gray-500 dark:focus:border-gray-500"
           placeholder="Discover Tokens"
           autoComplete="off"
         />
@@ -128,8 +127,7 @@ function StackedSwitch() {
   );
 }
 
-function Status() {
-  const [status, setStatus] = useState('live');
+function Status({ status, setStatus }) {
   return (
     <RadioGroup
       value={status}
@@ -173,84 +171,121 @@ function Status() {
 }
 
 export default function Farms() {
-  let config = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: 'https://8e7c-122-172-83-203.ngrok-free.app/marketplace/list',
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "*"
-    }
+  const [marketData, setMarketData] = useState([]);
+  const [status, setStatus] = useState('live');
+  const [loading, setLoading] = useState(false);
+
+  const getMarketData = async () => {
+    setLoading(true);
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'https://8e7c-122-172-83-203.ngrok-free.app/marketplace/list',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': '*',
+      },
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        setMarketData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setLoading(false);
   };
 
-  axios.request(config)
-    .then((response) => {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  useEffect(() => {
+    getMarketData();
+  }, []);
+
   return (
-    <div className="mx-auto w-full">
-      <div
-        className={cn(
-          'mb-6 flex flex-col justify-between gap-4', 'md:flex-row md:items-center md:gap-6'
-        )}
-      >
-        <div className="flex items-center justify-between gap-4">
-          <Status />
+    <>
+      {loading ?
+        <div className="absolute inset-0 h-full w-full flex items-center justify-center">
+          <Loader variant="blink" />
+        </div>
+        :
+        <div className="mx-auto w-full">
           <div
             className={cn(
-              'md:hidden'
+              'mb-6 flex flex-col justify-between gap-4',
+              'md:flex-row md:items-center md:gap-6'
             )}
           >
-            <StackedSwitch />
+            <div className="flex items-center justify-between gap-4">
+              <Status status={status} setStatus={setStatus} />
+              <div className={cn('md:hidden')}>
+                <StackedSwitch />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between gap-4 lg:gap-8">
+              <div className={cn('hidden shrink-0 ', 'md:block')}>
+                <StackedSwitch />
+              </div>
+              <Search />
+              <SortList />
+            </div>
           </div>
-        </div>
 
-        <div className="flex items-center justify-between gap-4 lg:gap-8">
-          <div
-            className={cn(
-              'hidden shrink-0 ',
-              'md:block'
-            )}
-          >
-            <StackedSwitch />
+          <div className="mb-3 hidden grid-cols-3 gap-6 rounded-lg bg-white shadow-card dark:bg-light-dark sm:grid lg:grid-cols-5">
+            <span className="px-6 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300">
+              Token
+            </span>
+            <span className="px-6 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300">
+              Underwriter
+            </span>
+            <span className="hidden px-6 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300 lg:block">
+              APY
+            </span>
+            <span className="hidden px-4 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300 lg:block">
+              Liquidity
+            </span>
+            <span className="px-6 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300">
+              Validity
+            </span>
           </div>
-          <Search />
-          <SortList />
+
+          {status === "live" && marketData?.map((item) => (
+            <FarmList
+              key={item?._id}
+              from={"BTC"}
+              token={item?.token_name}
+              underwriter={item?.underwriter}
+              apy={item.apy}
+              liquidity={item?.liquidity}
+              validity={item?.validity.$date}
+            />
+          ))}
         </div>
-      </div>
-
-      <div className="mb-3 hidden grid-cols-3 gap-6 rounded-lg bg-white shadow-card dark:bg-light-dark sm:grid lg:grid-cols-5">
-        <span className="px-6 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300">
-          Token
-        </span>
-        <span className="px-6 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300">
-          Underwriter
-        </span>
-        <span className="hidden px-6 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300 lg:block">
-          APY
-        </span>
-        <span className="hidden px-4 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300 lg:block">
-          Liquidity
-        </span>
-        <span className="px-6 py-6 text-sm tracking-wider text-gray-500 dark:text-gray-300">
-          Validity
-        </span>
-      </div>
-
-      {FarmsData.map((farm) => (
-        <FarmList
-          key={farm.id}
-          from={farm.from}
-          to={farm.to}
-          earned={farm.earned}
-          apr={farm.apr}
-          liquidity={farm.liquidity}
-          multiplier={farm.multiplier}
-        />
-      ))}
-    </div>
+      }
+    </>
   );
 }
+// [
+//   {
+//     _id: { $oid: '6532b4eccbf53fb98ae92503' },
+//     apy: 0.02,
+//     creation_date: { $date: 1697841732486 },
+//     has_community_oracle: false,
+//     hotness: 19,
+//     liquidity: 500000,
+//     token_name: {
+//       logo: 'https://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png',
+//       name: 'John Doe',
+//       symbol: 'JOH',
+//     },
+//     underwriter: {
+//       logo: 'https://abcinsurance.com/logo.png',
+//       name: 'ABC Insurance Co.',
+//       pub_key: 'abc123xyz456',
+//       site: 'https://abcinsurance.com',
+//     },
+//     validity: { $date: 1715472000000 },
+//   },
+// ];
