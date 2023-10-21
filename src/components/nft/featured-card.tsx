@@ -25,10 +25,12 @@ export default function FeaturedCard({ item, className }: FeaturedCardProps) {
     name,
     avatar,
     authorSlug,
-    created_at,
+    updated,
     amount,
+    value,
     transactionUrl,
   } = item;
+
   return (
     <div
       className={cn(
@@ -37,31 +39,31 @@ export default function FeaturedCard({ item, className }: FeaturedCardProps) {
       )}
     >
       <div className="flex w-[68%] shrink-0 items-center">
-        <div className="h-7 w-7 shrink-0 rounded-full md:h-8 md:w-8 xl:h-10 xl:w-10">
+        {/* <div className="h-7 w-7 shrink-0 rounded-full md:h-8 md:w-8 xl:h-10 xl:w-10">
           {avatar && <Image src={avatar} alt={name} width={40} height={40} />}
-        </div>
+        </div> */}
         <div className="truncate ltr:ml-2 rtl:mr-2">
           <div className="mb-0.5 truncate text-sm font-medium -tracking-wider text-gray-900 dark:text-white">
-            {label} by{' '}
+            {/* {label} by{' '} */}
             <AnchorLink
-              href={authorSlug}
+              href={""}
               className="-tracking-wide text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             >
-              @{"oracle"}
+              {name}
             </AnchorLink>
           </div>
           <div className="truncate text-xs -tracking-wider text-gray-600 dark:text-gray-400">
             last updated {" "}
-            {dayjs(created_at).format('MMM D, YYYY')} at{' '}
-            {dayjs(created_at).format('h:mm a')}
+            {dayjs(updated).format('MMM D, YYYY')} at{' '}
+            {dayjs(updated).format('h:mm a')}
           </div>
         </div>
       </div>
-      {(amount || transactionUrl) && (
+      {(value) && (
         <div className="flex shrink-0 items-center ltr:pl-2 ltr:pr-0.5 rtl:pr-2 rtl:pl-0.5">
-          {amount && (
+          {value && (
             <div className="text-sm font-medium -tracking-wider ltr:pr-2.5 rtl:pl-2.5 sm:text-base sm:ltr:pr-3 sm:rtl:pl-3">
-              {amount} USDC
+              {value}
             </div>
           )}
           {/* {transactionUrl && (

@@ -13,6 +13,8 @@ import SwapCard from '../ui/swap-card';
 import LiquidityChart from '../ui/chats/liquidity-chart';
 import VolumeChart from '../ui/chats/volume-chart';
 import ComparisonChart from '../ui/chats/comparison-chart';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 type Avatar = {
   id: string | number;
@@ -48,6 +50,95 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
     owner,
     block_chains,
   } = product;
+  const [oraclesList, setOraclesList] = useState([])
+  const [marketData, setMarketData] = useState([])
+  // {
+  //   "_id": {
+  //     "$oid": "6532b4eccbf53fb98ae92503"
+  //   },
+  //   "apy": 0.02,
+  //     "creation_date": {
+  //     "$date": 1697841732486
+  //   },
+  //   "description": "Premium: 1200\nCoverage Amount:\n500000\nCoverage Details:\nThis policy covers a range of incidents including data breaches, service downtime, and SLA violations, providing up to $500,000 in coverage subject to terms and conditions outlined in the policy document.",
+  //     "exipry": "Sun, 12 May 2024 00:00:00 GMT",
+  //       "has_community_oracle": false,
+  //         "hotness": 19,
+  //           "insuree": {
+  //     "logo": "https://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png",
+  //       "name": "Alphabet Inc.",
+  //         "site": "https://about.google.com"
+  //   },
+  //   "liquidity": 500000,
+  //     "oracles": {
+  //     "Core Language Risk": {
+  //       "updated": "Sat, 21 Oct 2023 08:31:12 GMT",
+  //         "value": "Golang (in-house)"
+  //     },
+  //     "Dependency Risk": {
+  //       "updated": "Sat, 21 Oct 2023 08:32:12 GMT",
+  //         "value": "0.45"
+  //     },
+  //     "Pool Solvency": {
+  //       "updated": "Sat, 21 Oct 2023 08:33:12 GMT",
+  //         "value": "100%"
+  //     },
+  //     "Secrets Leak Risk": {
+  //       "updated": "Sat, 21 Oct 2023 08:34:12 GMT",
+  //         "value": "0.001%"
+  //     },
+  //     "Terraform Script Risk": {
+  //       "updated": "Sat, 21 Oct 2023 08:32:12 GMT",
+  //         "value": "None"
+  //     }
+  //   },
+  //   "token_name": {
+  //     "logo": "https://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png",
+  //       "name": "John Doe",
+  //         "symbol": "JOH"
+  //   },
+  //   "underwriter": {
+  //     "logo": "https://abcinsurance.com/logo.png",
+  //       "name": "ABC Insurance Co.",
+  //         "pub_key": "abc123xyz456",
+  //           "site": "https://abcinsurance.com"
+  //   },
+  //   "validity": {
+  //     "$date": 1715472000000
+  //   }
+  // }
+
+  const getDetails = async () => {
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'https://8e7c-122-172-83-203.ngrok-free.app/marketplace/details',
+      headers: {}
+    };
+
+    axios.request(config)
+      .then((response) => {
+        setMarketData(response.data)
+        const oracles = []
+
+        for (const key in response?.data?.oracles) {
+          const oracleObject = {
+            name: key,
+            updated: response?.data?.oracles[key].updated,
+            value: response?.data?.oracles[key].value
+          };
+          oracles.push(oracleObject);
+        }
+        setOraclesList(oracles)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    getDetails()
+  }, [])
 
   return (
     <div className="flex self-center flex-grow">
@@ -62,41 +153,47 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
             <div className="block">
               <div className="flex justify-between">
                 <h2 className="text-xl font-medium leading-[1.45em] -tracking-wider text-gray-900 dark:text-white md:text-2xl xl:text-3xl">
-                  {name}
+                  {marketData?.insuree?.name}
                 </h2>
-                <div className="mt-1.5 shrink-0 ltr:ml-3 rtl:mr-3 xl:mt-2">
+                {/* <div className="mt-1.5 shrink-0 ltr:ml-3 rtl:mr-3 xl:mt-2">
                   <NftDropDown />
-                </div>
+                </div> */}
               </div>
               <AnchorLink
-                href={minted_slug}
+                href={""}
                 className="mt-1.5 inline-flex items-center text-sm -tracking-wider text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white xl:mt-2.5"
               >
-                Created on {minted_date}
-                <ArrowLinkIcon className="h-3 w-3 ltr:ml-2 rtl:mr-2" />
+                Created on {new Date(marketData?.creation_date?.$date).toDateString()}
+                {/* <ArrowLinkIcon className="h-3 w-3 ltr:ml-2 rtl:mr-2" /> */}
               </AnchorLink>
               <div className="mt-4 flex flex-wrap gap-6 pt-0.5 lg:-mx-6 lg:mt-6 lg:gap-0">
                 <div className="shrink-0 border-dashed border-gray-200 dark:border-gray-700 lg:px-6 lg:ltr:border-r lg:rtl:border-l">
                   <h3 className="text-heading-style mb-2 uppercase text-gray-900 dark:text-white">
                     Insuree
                   </h3>
-                  {/* <AnchorLink href={creator?.slug} className="inline-flex">
+                  <AnchorLink href={""} className="inline-flex">
                     <ListCard
-                      item={creator}
+                      item={{
+                        name: marketData?.insuree?.name,
+                        logo: marketData?.insuree?.logo
+                      }}
                       className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                     />
-                  </AnchorLink> */}
+                  </AnchorLink>
                 </div>
                 <div className="shrink-0 lg:px-6">
                   <h3 className="text-heading-style mb-2.5 uppercase text-gray-900 dark:text-white">
                     Insurer
                   </h3>
-                  {/* <AnchorLink href="#" className="inline-flex">
+                  <AnchorLink href="" className="inline-flex">
                     <ListCard
-                      item={collection}
+                      item={{
+                        name: marketData?.underwriter?.name,
+                        logo: marketData?.underwriter?.logo
+                      }}
                       className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                     />
-                  </AnchorLink> */}
+                  </AnchorLink>
                 </div>
               </div>
             </div>
@@ -124,7 +221,7 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                         Description
                       </h3>
                       <div className="text-sm leading-6 -tracking-wider text-gray-600 dark:text-gray-400">
-                        {description}
+                        {marketData?.description}
                       </div>
                     </div>
                     <div className="block">
@@ -133,7 +230,7 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                       </h3>
                       <AnchorLink href={owner?.slug} className="inline-block text-gray-600 hover:text-gray-900 dark:text-gray-400">
 
-                        {minted_date}
+                        {marketData?.exipry}
                         {/* <ListCard
                           item={owner}
                           className="rounded-full p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
@@ -145,10 +242,10 @@ export default function NftDetails({ product }: { product: NftDetailsProps }) {
                 </TabPanel>
                 <TabPanel className="focus:outline-none">
                   <div className="flex flex-col-reverse">
-                    {nftData?.bids?.map((bid) => (
+                    {oraclesList.map((bid) => (
                       <FeaturedCard
                         item={bid}
-                        key={bid?.id}
+                        key={bid?._id}
                         className="mb-3 first:mb-0"
                       />
                     ))}

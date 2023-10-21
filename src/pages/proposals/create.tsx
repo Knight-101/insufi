@@ -1,5 +1,5 @@
 import type { NextPageWithLayout } from '@/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import routes from '@/config/routes';
@@ -209,7 +209,7 @@ function CripticTokenAction({
   );
 }
 
-function ActionFields() {
+function ActionFields({ form, setForm }) {
   let [actionType, setActionType] = useState(actionOptions[0]);
   let [reserveAction, setReserveAction] = useState(reserveOptions[0]);
   let [chart, setChart] = useState(
@@ -221,6 +221,16 @@ function ActionFields() {
   let [claim, setClaim] = useState(
     claims[0]
   );
+  useEffect(() => {
+    chart && setForm((prev) => {
+      return ({
+        ...prev,
+        "choose_visualization": chart?.value
+      })
+    })
+  }, [chart])
+
+
   return (
     <div className="">
       <div className="group mb-4 rounded-md bg-gray-100/90 p-5 pt-3 dark:bg-dark/60 xs:p-6 xs:pb-8">
@@ -274,7 +284,12 @@ function ActionFields() {
             Your title introduces your proposal to the voters. Make sure it is
             clear and to the point.
           </p> */}
-                <Input placeholder="" />
+                <Input onChange={(e) => setForm((prev) => {
+                  return ({
+                    ...prev,
+                    "oracle_address": e?.target?.value
+                  })
+                })} placeholder="" required />
               </div>
               <div className="mb-6 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
                 <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
@@ -284,7 +299,12 @@ function ActionFields() {
             Your title introduces your proposal to the voters. Make sure it is
             clear and to the point.
           </p> */}
-                <Input placeholder="" />
+                <Input type='number' onChange={(e) => setForm((prev) => {
+                  return ({
+                    ...prev,
+                    "refresh_frequency": e?.target?.value
+                  })
+                })} value={form?.["refresh_frequency"]} placeholder="" required />
               </div>
               <div className="mb-6 rounded-lg bg-white p-5 shadow-card transition-shadow duration-200 hover:shadow-large dark:bg-light-dark xs:p-6 xs:pb-8">
                 <h3 className="mb-2 text-base font-medium dark:text-gray-100 xl:text-lg">
@@ -379,27 +399,8 @@ function ActionFields() {
               </div>
             </>
           )}
-          {/* {actionType.value === 'oracle' && (
-            <Input
-              className="mt-4 ltr:xs:ml-6 rtl:xs:mr-6 ltr:sm:ml-12 rtl:sm:mr-12"
-              useUppercaseLabel={false}
-              placeholder="Enter contact address 0x1f9840a85..."
-            />
-          )} */}
-          {/* {actionType.value === 'bid' && (
-            <div className="rtl:xs:mlr6 rtl:sm:mlr12 mt-4 ltr:xs:ml-6 ltr:sm:ml-12">
-              <CripticTokenAction
-                selectedOption={cripticTokenAction}
-                onChange={setCripticTokenAction}
-              />
-            </div>
-          )} */}
-
         </>
       </div>
-      {/* <Button variant="ghost" className="mt-2 xs:mt-3">
-        Add another action
-      </Button> */}
     </div>
   );
 }
@@ -407,6 +408,50 @@ function ActionFields() {
 const CreateProposalPage: NextPageWithLayout = () => {
   const router = useRouter();
   let [actionType, setActionType] = useState(actionOptions[0]);
+  let [formData, setFormdata] = useState({
+    "oracle_address": "",
+    "refresh_frequency": 100,
+    "choose_visualization": "",
+    "insuree": {
+      "name": "Alphabet Inc.",
+      "logo": "https://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png",
+      "site": "https://about.google.com"
+    },
+    "underwriter": {
+      "name": "Allianz",
+      "logo": "https://i.ibb.co/hgr21ZC/ALV-DE-D.png",
+      "site": "https://www.allianz.com/en.html"
+    },
+    "token": {
+      "name": "Alphabet Inc. Cloud SLA FY24",
+      "logo": "https://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png",
+      "symbol": "GFC"
+    }
+  });
+
+  const createProposal = () => {
+    console.log(formData)
+    const axios = require('axios');
+    let data = JSON.stringify(formData);
+
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://8e7c-122-172-83-203.ngrok-free.app/risk/oracles',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   function goToAllProposalPage() {
     setTimeout(() => {
@@ -468,7 +513,7 @@ const CreateProposalPage: NextPageWithLayout = () => {
             executed in the order laid out here (ie. Action #1 fires, then
             Action #2, etc.)
           </p> */}
-          <ActionFields />
+          <ActionFields form={formData} setForm={setFormdata} />
         </div>
 
 
@@ -479,6 +524,7 @@ const CreateProposalPage: NextPageWithLayout = () => {
             shape="rounded"
             fullWidth={true}
             className="xs:w-64 md:w-72"
+            onClick={createProposal}
           >
             Create Proposal
           </Button>

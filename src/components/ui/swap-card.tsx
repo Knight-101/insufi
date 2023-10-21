@@ -5,6 +5,7 @@ import TransactionInfo from '@/components/ui/transaction-info';
 import { SwapIcon } from '@/components/icons/swap-icon';
 import Trade from '@/components/ui/trade';
 import { useState, SVGProps, } from 'react';
+import NextLink from 'next/link';
 
 const DeepbookLogo = (props: SVGProps<SVGSVGElement>) => (
     <svg
@@ -55,6 +56,7 @@ export default function SwapCard() {
                 >
                     <CoinInput
                         label={'From'}
+                        isBase={true}
                         exchangeRate={0.0}
                         defaultCoinIndex={0}
                         getCoinValue={(data) => console.log('From coin value:', data)}
@@ -86,14 +88,16 @@ export default function SwapCard() {
                 <TransactionInfo label={'Network Fee'} />
                 <TransactionInfo label={'Deepbook Fee'} />
             </div>
-            <Button
-                size="large"
-                shape="rounded"
-                fullWidth={true}
-                className="my-6 uppercase xs:mt-8 xs:tracking-widest"
-            >
-                SWAP
-            </Button>
+            <NextLink href="/portfolio">
+                <Button
+                    size="large"
+                    shape="rounded"
+                    fullWidth={true}
+                    className="my-6 uppercase xs:mt-8 xs:tracking-widest"
+                >
+                    BUY
+                </Button>
+            </NextLink>
             <div className="flex items-center justify-center gap-4">
                 <p className="text-xs mt-4">
                     Powered by

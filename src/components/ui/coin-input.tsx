@@ -14,6 +14,7 @@ const CoinSelectView = dynamic(
 
 interface CoinInputTypes extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  isBase?: boolean;
   exchangeRate?: number;
   defaultCoinIndex?: number;
   className?: string;
@@ -28,6 +29,7 @@ export default function CoinInput({
   defaultCoinIndex = 0,
   exchangeRate,
   className,
+  isBase,
   ...rest
 }: CoinInputTypes) {
   let [value, setValue] = useState('');
@@ -61,13 +63,26 @@ export default function CoinInput({
           <span className="mb-1.5 block text-xs uppercase text-gray-600 dark:text-gray-400">
             {label}
           </span>
-          <button
-            className="flex items-center font-medium outline-none dark:text-gray-100"
-          >
-            {selectedCoin?.icon}{' '}
-            <span className="ltr:ml-2 rtl:mr-2">{selectedCoin?.code} </span>
-            {/* <ChevronDown className="ltr:ml-1.5 rtl:mr-1.5" /> */}
-          </button>
+          {!isBase ?
+            <button
+              className="flex items-center font-medium outline-none dark:text-gray-100"
+            >
+              {selectedCoin?.icon}{' '}
+              <span className="ltr:ml-2 rtl:mr-2">{selectedCoin?.code} </span>
+              {/* <ChevronDown className="ltr:ml-1.5 rtl:mr-1.5" /> */}
+            </button> :
+            <div className='flex items-center gap-2'>
+              <span>
+                <img
+                  src={"https://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png"}
+                  width={20}
+                  height={20}
+
+                  alt="Token"
+                /></span>
+              {"GFC"}
+            </div>
+          }
         </div>
         <div className="flex flex-1 flex-col text-right">
           <input
@@ -83,7 +98,7 @@ export default function CoinInput({
             = ${exchangeRate ? exchangeRate : '0.00'}
           </span>
         </div>
-      </div>
+      </div >
 
       <AnimatePresence>
         {visibleCoinList && (

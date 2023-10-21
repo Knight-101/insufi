@@ -18,6 +18,10 @@ const nextConfig = withPWA({
         protocol: 'https',
         hostname: 'assets.stickpng.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'abcinsurance.com',
+      },
     ],
   },
   reactStrictMode: true,

@@ -108,7 +108,14 @@ export default function ComparisonChart() {
                   toggleCoin ? 'flex-row-reverse' : 'flex-row'
                 )}
               >
-                <Bitcoin className="h-auto w-7 lg:w-9" />
+                {/* <Bitcoin className="h-auto w-7 lg:w-9" /> */}
+                <span>
+                  <img
+                    src={"https://assets.stickpng.com/images/5847f9cbcef1014c0b5e48c8.png"}
+                    width={30}
+                    height={30}
+                    alt="Token"
+                  /></span>
                 {/* <EthereumDark className="h-auto w-7 lg:w-9" /> */}
                 <Usdc className="h-auto w-7 lg:w-9" />
               </span>
@@ -118,7 +125,7 @@ export default function ComparisonChart() {
                   toggleCoin ? 'flex-row-reverse' : 'flex-row'
                 )}
               >
-                <span>BTCB</span>/<span>USDC</span>
+                <span>GFC</span>/<span>USDC</span>
               </span>
               {/* <Button
                 size="mini"
